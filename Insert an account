@@ -1,0 +1,15 @@
+public class DmlOperations {
+    public static void insertOp(){
+        List<Account> myAccounts = new List<Account>();
+        Account myAccount = new Account();
+        Account secAccount = new Account();
+        myAccount.name = 'DML test';
+        secAccount.name = 'Second DML test';
+        myAccounts.add(myAccount);
+        myAccounts.add(secAccount);
+        insert myAccounts;
+        for (Account acc : myAccounts){
+            system.debug(acc.Id);
+            system.debug(acc.name);}
+    }
+}
