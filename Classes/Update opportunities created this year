@@ -1,0 +1,16 @@
+    public static void queryOpportunities(){
+        List<Opportunity> myOpportunities = [SELECT Id,amount,stageName  
+                                             FROM Opportunity
+                                             WHERE  CreatedDate= this_Year ];   // this_year is one of date literals provided by Salesforce
+        if(!myOpportunities.isEmpty()){
+                for(Opportunity opp :myOpportunities){
+                    if(opp.stageName == 'Closed won'){
+                        opp.description = 'Opportunity is Closed won';
+                    }else if(opp.stageName == 'Closed lost'){
+                        opp.description = 'Opportunity is Closed lost';
+                    }else{
+                        opp.description = 'Opportunity is Open';
+                    } 
+                    UPDATE myOpportunities ;
+            }}
+    } 
