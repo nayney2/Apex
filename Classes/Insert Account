@@ -14,3 +14,15 @@ public class DmlOperations {
             system.debug(acc.name);}
     }
 }
+//Insert bunch of Accounts once 
+public class BatchDml {
+    public static void insertAccounts(){
+        List<Account > myAccounts = new List<Account>();
+        for(integer i=0; i < = 150 ; i++){
+            Account myAccount = new Account();
+            myAccount.name = 'Account Number : '+i;
+            myAccounts.add(myAccount);
+        }
+        insert myAccounts;
+    }
+} 
