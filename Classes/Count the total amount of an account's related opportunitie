@@ -1,0 +1,15 @@
+//Count the total number of opportunities related to an account
+    public static void countRelatedOpportunities(){
+        Decimal total = 0;
+        List<Account> myAccounts = [SELECT Id,Name,(SELECT Id,amount  FROM Opportunities)
+                                    FROM Account
+                                    WHERE  Name LIKE '%test' AND phone!=null ];
+        if(!myAccounts.isEmpty()){
+        for(Account acc :myAccounts){
+             for(Opportunity opp :acc.Opportunities){
+                 if(opp.Amount != null){
+                total = total+opp.Amount;
+            }}
+            System.debug('Account name: '+acc.name+' has '+total+' worth opportunities');
+        }}
+    }  
