@@ -1,0 +1,11 @@
+//Child to Parent query
+    public static void positionsAndCandidatesWithJobApplications(){
+        List<Job_Application__c> myJAs = [SELECT Id, Name,Candidate__r.Name,Position__r.name            //custom object name + __r 
+                                    FROM Job_Application__c ];
+        if(!myJAs.isEmpty()){
+            for(Job_Application__c JA:myJAs){	
+                System.debug('JA Id : ' +JA.Id); 
+                        System.debug('Candidate Name : ' +JA.Candidate__r.Name);
+             System.debug('Position Name : ' +JA.Position__r.name);}
+        }
+    }
