@@ -1,0 +1,8 @@
+
+public static void undeleteAccounts(){
+        List<Account> myAccounts =  [SELECT Id,Name 
+                                    FROM Account
+                                    WHERE  Name LIKE '%test' ALL ROWS];
+        if(!myAccounts.isEmpty()){
+            undelete myAccounts;}
+    } 
