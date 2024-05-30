@@ -1,0 +1,13 @@
+//Count records categorized by industry across all accounts
+public static void countAccounts(){
+        List<Aggregateresult> myAccounts = [SELECT count(id) ,industry
+                                            FROM Account 
+                                            Group by industry];      
+        //any query that includes an aggregate function returns its results in an array of AggregateResult objects
+             System.debug('Account  : ' +myAccounts);
+             // OR
+            for(Account  acc :myAccounts ) {
+            System.debug('Account number of records  : ' +acc.get('expr0'));              // expr0 is count(id)
+            System.debug('Account's industry   : ' +acc.get('industry'));
+            }
+    } 
