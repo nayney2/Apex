@@ -1,0 +1,14 @@
+//Query accounts with phone != null
+    public static void updateAccounts(){
+        List<Account> accountsToModify = new List<//Account>();
+        List<Account> myAccounts = [SELECT Id,Name,phone 
+                                    FROM Account
+                                    WHERE  Name LIKE '% test' AND phone != null];
+        if(!myAccounts.isEmpty()){ 
+        for(Account acc : myAccounts ){
+            acc.name = 'Updated account';
+            acc.phone = '555' ;
+            accountsToModify.add(acc);
+        }}
+        update accountsToModify;
+    } 
