@@ -1,0 +1,19 @@
+public class MapAcoountIdValue {
+    public static void accountIdsAndValuesWithoutLoop(){        
+        List<Account> Accounts = [SELECT Id, Name, Phone FROM Account];
+        Map<Id,Account> accIdVal = new Map<Id,Account>(Accounts); // Assign list to map as a parameter (Account.Id => Map Id and rest Acc fields => Map account
+            System.debug('Map: '+accIdVal);
+            System.debug('Keys: '+ accIdVal.keyset());
+            System.debug('Values: '+ accIdVal.values());
+    }
+    public static void accountIdsAndValuesWithLoop(){        
+        List<Account> Accounts = [SELECT Id, Name, Phone FROM Account];
+        Map<Id,Account> accIdVal = new Map<Id,Account>();
+        for(Account acc: Accounts){
+            accIdVal.put(acc.id,acc);
+}            System.debug('Map: '+accIdVal);
+            System.debug('Keys: '+ accIdVal.keyset());
+            System.debug('Values: '+ accIdVal.values());
+    }    
+
+}
