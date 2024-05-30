@@ -1,0 +1,12 @@
+// Query accounts with related contacts where phone is not null, and display AccountName and number of related contacts
+public class QueryRecords {
+    public static void queryAccounts(){
+                List<Account> myAccounts = [SELECT Id,Name,Phone,(SELECT Id FROM Contacts)
+                                            FROM Account
+                                            WHERE  Name LIKE '%test' AND phone!=null ];
+          if(!myAccounts.isEmpty()){                  
+        for(Account acc :myAccounts){
+            System.debug('Account name: '+acc.Name+' has '+acc.contacts.size()+' contacts related');
+        }}
+    }
+}
