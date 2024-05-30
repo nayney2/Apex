@@ -1,0 +1,11 @@
+//Insertion failed since required field is missing
+try{
+        for(integer i=0;i<3;i++){
+           Account acc = new Account();
+            // acc.name = 'New account'+i;      => Name not populated
+            acc.phone = '666' ;
+            myAccounts.add(acc);}
+        upsert myAccounts;
+        }catch(DMLException e){
+        System.debug(e);
+        }
