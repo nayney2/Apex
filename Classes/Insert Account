@@ -1,5 +1,6 @@
+//Insert one or many Accounts
 public class DmlOperations {
-    public static void insertOp(){
+    public static void insertOperation(){
         List<Account> myAccounts = new List<Account>();
         Account myAccount = new Account();
         Account secAccount = new Account();
@@ -13,4 +14,3 @@ public class DmlOperations {
             system.debug(acc.name);}
     }
 }
-// 
