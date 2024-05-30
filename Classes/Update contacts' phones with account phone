@@ -1,0 +1,13 @@
+//Update the phone numbers of contacts with the phone number of their associated account
+public static void childToParent(){
+        List<contact> myContacts = [SELECT Id,Account.phone,Phone 
+                                    FROM Contact
+                                    WHERE  CreatedDate= this_week AND Account.phone!=null];
+        if(!myContacts.isEmpty()){
+                for(Contact con : myContacts){
+                    if(con.Phone == null){
+                        con.Phone = con.Account.phone;
+                        System.debug('Contact phone : '+con.Phone);
+                }              
+            }} Update myContacts ;   
+    }
