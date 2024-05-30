@@ -1,1 +1,2 @@
-This repository is an archive of all Apex projects done by @nayney2 
+This repository is an archive of my journey through various Apex projects done by @nayney2 
+Happy coding !
