@@ -2,7 +2,7 @@
 public class DmlOperations {
     public static void insertOperation(){
         List<Account> myAccounts = new List<Account>();
-        Account myAccount = new Account();
+        Account myAccount = new Account(); 
         Account secAccount = new Account();
         myAccount.name = 'DML test';
         secAccount.name = 'Second DML test';
