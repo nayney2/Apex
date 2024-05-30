@@ -1,0 +1,12 @@
+public static void totalContactsOfAccounts(){
+        List<Account> myAccounts = [SELECT Id,Name,Total_number2__c	 ,(SELECT Id FROM Contacts)
+                                    FROM Account
+                                    WHERE  CreatedDate= this_Year];
+        if(!myAccounts.isEmpty()){
+            for(Account acc : myAccounts){
+                    if(!acc.contacts.size()){
+                        acc.Total_number2__c = acc.contacts.size();                        
+                        System.debug('Total contacts: '+acc.Total_number2__c);
+                     }
+        } }     Update myAccounts;
+     }
