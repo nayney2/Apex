@@ -1,8 +1,9 @@
-
+//Undelete account records with names ending in 'test'
 public static void undeleteAccounts(){
         List<Account> myAccounts =  [SELECT Id,Name 
                                     FROM Account
-                                    WHERE  Name LIKE '%test' ALL ROWS];
+                                    WHERE  Name LIKE '%test' ALL ROWS];         // All Rows => in recycle bin 
         if(!myAccounts.isEmpty()){
-            undelete myAccounts;}
+            undelete myAccounts;
+}
     } 
