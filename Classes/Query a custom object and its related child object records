@@ -1,4 +1,5 @@
-    public static void reviewsWithJobApplications(){
+//Parent to child query
+public static void reviewsWithJobApplications(){
         List<Job_Application__c> myJAs = [SELECT Id,(Select Id,name FROM Reviews__r)                 // child relationship name + __r
                                     FROM Job_Application__c	];
         if(!myJAs.isEmpty()){
