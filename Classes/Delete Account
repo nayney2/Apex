@@ -1,3 +1,4 @@
+//Delete account records with names ending in 'test'
 public static void deleteAccounts(){
         List<Account> myAccounts =  [SELECT Id,Name 
                                     FROM Account
