@@ -4,7 +4,7 @@ public static void totalContactsOfAccounts(){
                                     WHERE  CreatedDate= this_Year];
         if(!myAccounts.isEmpty()){
             for(Account acc : myAccounts){
-                    if(!acc.contacts.size()){
+                    if(acc.contacts.size()!=0){
                         acc.Total_number2__c = acc.contacts.size();                        
                         System.debug('Total contacts: '+acc.Total_number2__c);
                      }
