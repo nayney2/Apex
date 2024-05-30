@@ -1,0 +1,42 @@
+//Insert Accounts with related contacts
+public class DmlOperations {
+    public static void insertAccountsRelatedToContacts(){
+        //Creation of lists and variables
+        List<Account> myAccounts = new List<Account>();
+        List<Contact> myContacts = new List<Contact>();
+        Set<Id> myIds ;
+        //Creation of a first account
+        Account myAccount = new Account();
+        myAccount.name = 'DML test';
+        myAccounts.add(myAccount);
+        //Creation of a second account and related contact
+        Account secAccount = new Account();
+        secAccount.name = 'Second DML test';
+        myAccounts.add(secAccount);
+        //Bulk Insertion
+        insert myAccounts;
+        //Creation of related contact
+        Contact myContact = new Contact();
+        myContact.LastName = 'First DML';
+        myContact.FirstName = 'contact';
+        myContact.AccountId = myAccounts[1].Id;   
+        myContacts.add(myContact);
+        //Bulk Insertion
+        insert myContacts;
+        //Fetch the Ids and names of all created accounts and their related contacts
+        List<//Account> fetchAccounts = [SELECT Id,Name ,(SELECT Id,AccountId,LastName FROM Contacts)
+                                       FROM Account
+                                       WHERE Id IN :myAccounts];
+        If(!fetchAccounts.isEmpty()){
+        for (Account acc : fetchAccounts){
+            system.debug('Account name :'+acc.name);
+            system.debug('Account Id :'+acc.Id);
+            If(!acc.contacts.isEmpty()){
+            for (Contact con : acc.contacts){
+                system.debug('Contact account is Id :'+con.AccountId);
+                system.debug('Contact last name :'+con.LastName);
+                system.debug('Contact Id :'+con.Id);
+               }} }
+        }
+    }
+}
