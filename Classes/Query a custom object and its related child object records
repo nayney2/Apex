@@ -1,0 +1,13 @@
+    public static void reviewsWithJobApplications(){
+        List<Job_Application__c> myJAs = [SELECT Id,(Select Id,name FROM Reviews__r)                 // child relationship name + __r
+                                    FROM Job_Application__c	];
+        if(!myJAs.isEmpty()){
+            for(Job_Application__c JA:myJAs){
+                System.debug('JA Id : ' +ja.Id); 
+                if(!ja.Reviews__r.isEmpty()){
+                    for(Review__c rev : ja.Reviews__r){
+                        System.debug('Review Id : ' +rev.Id); 
+                     System.debug('Review name : ' +rev.name); 
+                    }}}
+        }
+    } 
