@@ -1,0 +1,16 @@
+//The records that have an ID will be updated, and the rest will be created
+public static void upsertAccounts(){
+        List<Account> myAccounts = [SELECT Id,Name 
+                                    FROM Account
+                                    WHERE  Name LIKE 'test%'];
+        for(Account acc : myAccounts ){
+            acc.name = 'Updated account';
+            acc.phone = '555' ;
+        }
+        for(integer i=0;i<3;i++){
+           Account acc = new Account();
+            acc.name = 'New account'+i;
+            acc.phone = '666' ;
+            myAccounts.add(acc);}
+        upsert myAccounts;
+    } 
