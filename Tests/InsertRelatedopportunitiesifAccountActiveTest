@@ -1,0 +1,27 @@
+    @isTest static void InsertOpportunityPositiveTest(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test class name';
+        myAccount.active__c = 'yes';
+        myAccounts.add(myAccount);
+        Test.startTest();
+        Insert myAccounts;
+        Test.stopTest();
+        List<Opportunity> queryOpportunities= [SELECT Id,AccountId 
+                                               FROM Opportunity
+                                               Where AccountId =:myAccounts[0].Id];
+                System.Assert(!queryOpportunities.isEmpty() ,'Opportunity not created');
+            }
+    @isTest static void InsertOpportunityNegativeTest(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test class name';
+        myAccount.active__c = 'no';
+        myAccounts.add(myAccount);
+        Test.startTest();
+        Insert myAccounts;
+        Test.stopTest();
+        List<Opportunity> queryOpportunities= [SELECT Id,AccountId 
+                                               FROM Opportunity
+                                               Where AccountId =:myAccounts[0].Id];
+                System.Assert(queryOpportunities.isEmpty() ,'Related opportunity has been created ');     }
