@@ -1,0 +1,20 @@
+    public static void insertAccountWithOpps(List<Account> accList){
+        List<Opportunity> myOpportunities = new List<Opportunity>();
+        for(Account acc : accList){
+            if(acc.active__c == 'yes'){
+            Opportunity opp = new Opportunity();
+            opp.AccountId = acc.Id;
+            opp.Name = 'Related opp 001';
+            opp.StageName = 'Prospecting';
+            opp.CloseDate = date.today();
+            myOpportunities.add(opp);
+        }}
+        Database.SaveResult[] oppList = Database.insert(myOpportunities,false);          // only the failed part will fail
+        for (integer i =0 ; i<oppList.size();i++){
+            if(!oppList[i].isSuccess()){
+                for(Database.error err : oppList[i].geterrors()){
+                    accList[i].addError(err.getmessage()); }	
+                
+            }
+        }
+    }
