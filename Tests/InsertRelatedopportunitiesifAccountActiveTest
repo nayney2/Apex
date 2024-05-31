@@ -9,7 +9,7 @@
         secAccount.active__c = 'no';
         myAccounts.add(secAccount);
         Test.startTest();
-        Database.SaveResult[] oppList = Database.insert(myAccounts,false);          // only the failed part will fail
+        Insert myAccounts ;       
         Test.stopTest();
         List<Opportunity> queryOpportunities= [SELECT Id,AccountId 
                                                FROM Opportunity
