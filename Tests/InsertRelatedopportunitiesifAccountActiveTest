@@ -1,4 +1,4 @@
-    @isTest static void InsertOpportunityPositiveTest(){
+    @isTest static void insertAccountWithOppsTest(){
         List<Account> myAccounts= new List<Account>();
         Account myAccount = new Account();
         myAccount.name = 'Test class name';
