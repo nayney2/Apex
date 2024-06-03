@@ -1,4 +1,5 @@
-    public static void UpdateEmployeesPhone(){
+// Update Employees phone with account phone
+public static void UpdateEmployeesPhone(){
         decimal total = 0;
         List<employee__c> EmployeesToUpdate = new List<employee__c>() ; 
             for (Account acc : [Select Id,Name,phone,(SELECT Name,Phone__c from employees__r WHERE CreatedDate = this_year) 
@@ -14,7 +15,7 @@
             }
         Update  EmployeesToUpdate ;
     } 
-// Using child to parent query
+// Using child to parent query 
     public static void childToParentUpdateEmployeesPhone(){
         decimal total = 0;
         List<employee__c> EmployeesToUpdate = new List<employee__c>() ; 
@@ -28,4 +29,21 @@
                         }     
             }
         Update  EmployeesToUpdate ;
+    } 
+//// Update contact phone with Employee phone
+   public static void UpdateEmployeesPhoneWithContactPhone(){
+        decimal total = 0;
+        List<Contact> ContactsToUpdate = new List<Contact>() ; 
+            for (Contact con : [Select Mobilephone,Employee__c, employee__r.Phone__c  
+                                      FROM Contact
+                                WHERE CreatedDate = last_week
+                                     ]){
+                if(con.employee__r.Phone__c  !=null){
+                        if(con.MobilePhone ==null){
+                            con.MobilePhone = con.employee__r.Phone__c;
+                            ContactsToUpdate.add(con)  ;
+                        }    }      
+                 
+            }
+        Update  ContactsToUpdate ;
     } 
