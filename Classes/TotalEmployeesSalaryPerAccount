@@ -1,0 +1,17 @@
+    public static void TotalEmployeesSalary(){
+        decimal total = 0;
+        List<Account> queryAccounts= [Select Id,Name,(SELECT Name,salary__c from employees__r) 
+                                      FROM Account
+                                      WHERE CreatedDate = this_year] ;
+
+        
+        for (Account acc : queryAccounts){
+                    if(acc.employees__r.size()!=0){
+                        for(employee__c em : acc.employees__r){
+                  total = em.salary__c +total  ;
+                        }      
+            acc.Total_salary__c = total;      
+            
+        }}
+        Update queryAccounts ;
+    }  
