@@ -1,0 +1,16 @@
+    public static void UpdateEmployeesPhone(){
+        decimal total = 0;
+        List<employee__c> EmployeesToUpdate = new List<employee__c>() ; 
+            for (Account acc : [Select Id,Name,phone,(SELECT Name,Phone__c from employees__r WHERE CreatedDate = this_year) 
+                                      FROM Account
+                                     ]){
+                if(acc.employees__r.size()!=0){
+                    for(employee__c em : acc.employees__r){
+                        if(em.Phone__c ==null || em.Phone__c=='' ){
+                            em.Phone__c = acc.phone ;
+                            EmployeesToUpdate.add(em)  ;
+                        }    }      
+                } 
+            }
+        Update  EmployeesToUpdate ;
+    } 
