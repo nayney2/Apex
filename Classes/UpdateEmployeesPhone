@@ -14,3 +14,18 @@
             }
         Update  EmployeesToUpdate ;
     } 
+// Using child to parent query
+    public static void childToParentUpdateEmployeesPhone(){
+        decimal total = 0;
+        List<employee__c> EmployeesToUpdate = new List<employee__c>() ; 
+            for (employee__c em : [SELECT Name,Phone__c ,account__c,account__r.phone
+                                    From employee__c 
+                                    WHERE CreatedDate = this_year
+                                     ]){
+                        if(em.Phone__c ==null || em.Phone__c=='' ){
+                            em.Phone__c = em.account__r.phone ;
+                            EmployeesToUpdate.add(em)  ;
+                        }     
+            }
+        Update  EmployeesToUpdate ;
+    } 
