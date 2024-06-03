@@ -1,0 +1,13 @@
+// count the total Employees for each Account and display it in the Total Employees field in Account table
+public static void countTotalEmployeesForAccounts(){
+      List<Account> queryAccounts= [Select Id,Name,(SELECT Name from employees__r) 
+                                    FROM Account
+                                    WHERE CreatedDate = this_year] ;
+
+      
+      for (Account acc : queryAccounts){
+         if(acc.employees__r.size()!=0){
+          acc.Total_employees__c = acc.employees__r.size();    
+      }}
+      Update queryAccounts ;
+  }
