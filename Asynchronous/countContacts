@@ -7,6 +7,8 @@ public class FutureMethods {
         for(Account acc : myAccounts){
             acc.Count_contacts__c	 = acc.contacts.size();
         }
-        Update myAccounts ;
-    }
+
+ if(!myAccounts.isEmpty()){
+        Update myAccounts ;}
+    }    
 }
