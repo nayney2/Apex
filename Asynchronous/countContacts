@@ -1,0 +1,12 @@
+public class FutureMethods {
+@Future
+    public static void countContacts(List<Id> AccountIds){
+        List<Account> myAccounts = [SELECT Id ,(SELECT Id FROM Contacts) 
+                                    FROM Account
+                                   WHERE Id IN :AccountIds] ;
+        for(Account acc : myAccounts){
+            acc.Count_contacts__c	 = acc.contacts.size();
+        }
+        Update myAccounts ;
+    }
+}
