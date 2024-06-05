@@ -1,7 +1,7 @@
 public class FutureMethods {
 @Future
     public static void countContacts(List<Id> AccountIds){
-        List<Account> myAccounts = [SELECT Id ,(SELECT Id FROM Contacts) 
+        List<Account> myAccounts = [SELECT Id ,Count_contacts__c,(SELECT Id FROM Contacts) 
                                     FROM Account
                                    WHERE Id IN :AccountIds] ;
         for(Account acc : myAccounts){
