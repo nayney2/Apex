@@ -1,0 +1,29 @@
+@isTest
+public class FutureMethodsTest {
+    @isTest
+    public static void countContactsTest(){
+        List<Account> myAccounts = new List<Account>();
+        List<Contact> myContacts = new List<Contact>();
+        List<Id> myIds = new List<Id>();
+        for(integer i =0 ;i<15;i++){
+            myAccounts.add(new Account(name = 'Future account'+i)) ;
+        }
+        Test.startTest();
+        insert myAccounts;
+        for(Account acc : myAccounts){
+            Contact myContact =   new Contact(LastName = 'future contact 1',AccountId = acc.Id);
+            Contact secContact =  new Contact(LastName = 'future contact 2',AccountId = acc.Id);
+            myContacts.add(myContact);
+            myContacts.add(secContact);
+            myIds.add(acc.Id);
+    }
+    insert myContacts;
+    FutureMethods.countContacts(myIds);
+    Test.stopTest();
+    List<Account> queryAccounts = [SELECT Id,Count_contacts__c
+                                   FROM Account
+                                   WHERE Id IN :myAccounts];
+    System.assertEquals(2,queryAccounts[0].Count_contacts__c,'Contacts not counted successfully');
+}
+
+}
