@@ -1,0 +1,27 @@
+public class UpdateOpportunities implements Database.Batchable<sObject>,Database.Stateful {
+		public integer countRecords=0 ;
+    
+	//Convert apex class to batch apex : u need to implement an interface
+   public Database.QueryLocator start(Database.BatchableContext bc){
+             return Database.getQueryLocator([Select Id,LeadSource,Name FROM Opportunity LIMIT 5]);
+
+   }
+    // Whatever what start method is returning it will be store in the next list myOpportunities
+
+   public void execute(Database.BatchableContext bc, List<Opportunity> myOpportunities){
+       if(!myOpportunities.isEmpty()){
+       for(Opportunity opp : myOpportunities){
+           opp.LeadSource = 'Web';
+       }
+       Update myOpportunities;
+    } countRecords = countRecords+myOpportunities.size();
+   }
+
+   public void finish(Database.BatchableContext bc){
+       System.debug('Total of records is :'+countRecords);
+   }
+}
+
+//Invoke the batch class
+UpdateOpportunities Updateopps = new UpdateOpportunities();
+Id BatchId =Database.executeBatch( UpdateOpps);
