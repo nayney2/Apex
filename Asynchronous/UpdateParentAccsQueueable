@@ -1,0 +1,17 @@
+public class UpdateParentAccsQueueable implements Queueable {
+     private List<Account> accList ;
+      private Id parentAccId ;
+      public  UpdateOppsQueueableTestV2(List<Account> accts,Id accId){
+    this.accList = accts  ;
+          this.parentAccId = accId  ;
+          
+          public void execute(QueueableContext context){
+      for(Account myacc : accList){
+          myacc.parentId= accId;
+      }
+}
+//Anonymous Apex 
+     List<Account> queryAccounts = [SELECT Id,parentId FROM Account WHERE parentId=NULL];
+            Id getId = [SELECT Id FROM Account WHERE name='test account'][0].Id;
+      UpdateParentAccsQueueable Updateaccs = new UpdateParentAccsQueueable();
+      ID jobID = System.enqueueJob(Updateaccs);
