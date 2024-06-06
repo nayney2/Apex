@@ -1,4 +1,4 @@
-public class UpdateOpportunities implements Database.Batchable<sObject>,Database.Stateful {
+public class UpdateOpportunities implements Database.Batchable<sObject>,Database.Stateful {         //stateful : instance variables hold values between transactions
 		public integer countRecords=0 ;
     
 	//Convert apex class to batch apex : u need to implement an interface
