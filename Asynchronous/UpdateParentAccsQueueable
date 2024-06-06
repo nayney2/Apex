@@ -9,9 +9,10 @@ public class UpdateParentAccsQueueable implements Queueable {
       for(Account myacc : accList){
           myacc.parentId= accId;
       }
+     Update accList;
 }
 //Anonymous Apex 
      List<Account> queryAccounts = [SELECT Id,parentId FROM Account WHERE parentId=NULL];
             Id getId = [SELECT Id FROM Account WHERE name='test account'][0].Id;
-      UpdateParentAccsQueueable Updateaccs = new UpdateParentAccsQueueable();
+      UpdateParentAccsQueueable Updateaccs = new UpdateParentAccsQueueable(accList,parentAccId);
       ID jobID = System.enqueueJob(Updateaccs);
