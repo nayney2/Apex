@@ -1,0 +1,19 @@
+    @isTest static void UpdateOpportunitiesTest(){
+        List<Opportunity> myOpportunities = new List<Opportunity>();
+        for(integer i=0;i<15;i++){
+            Opportunity opp = new Opportunity(
+                name = 'test batch'+i,closeDate=date.today(),
+                stageName='Close lost',leadsource = '');
+            myOpportunities.add(opp);
+        }
+        Test.startTest();
+        Insert myOpportunities;
+        UpdateOpportunities Updateopps = new UpdateOpportunities();
+        Id BatchId = Database.executeBatch(Updateopps);
+        Test.stopTest();
+        List<Opportunity> queryOpportunities= [SELECT Id,leadsource
+                                               FROM Opportunity
+                                               Where Id =:myOpportunities];
+        System.AssertEquals(15,queryOpportunities.size() ,'Opportunity not created');
+        System.AssertEquals('Web',queryOpportunities[0].leadSource ,'Opportunity not updated');
+    }
