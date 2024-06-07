@@ -1,11 +1,24 @@
 @isTest
 static void  UpdateParentAccsQueueableTest{
-List<Account> queryAccounts = [SELECT Id,parentId FROM Account WHERE parentId=NULL];
-            Id getId = [SELECT Id FROM Account WHERE name='test account'][0].Id;
-      UpdateParentAccsQueueable Updateaccs = new UpdateParentAccsQueueable(accList,parentAccId);
-      ID jobID = System.enqueueJob(Updateaccs);
+@testSetup static void setupMethod(){
+List<Account> myAccounts = new List<Account>();
+myAccounts.add( new Account(name = 'Parent Account'));
+for(integer i =0;i<5;i++){
+myAccounts.add( new Account(name = 'Account'+i));
+}
+insert myAccounts ;
+}
+@isTest static void QueueableTest(){
+List<Account> queryAccounts = [SELECT Id,parentId FROM Account WHERE name LIKE 'Account%'];
+            Id getId = [SELECT Id FROM Account WHERE name='parent account'][0].Id;
+      UpdateParentAccsQueueable Updateaccs = new UpdateParentAccsQueueable(queryAccounts,getId);
+Test.startTest();
+System.enqueueJob(Updateaccs);
+Test.stopTest();
+
 List<Account> checkAccounts= [SELECT Id,parentId
                                                FROM Account
                                                Where Id =:queryAccounts];
-        System.Assert(checkAccounts[0].parentId == getId,'Account not updated');
+        System.Assert(checkAccounts[0].parentId == getId,'Account has not a parent account');
+}
 }
