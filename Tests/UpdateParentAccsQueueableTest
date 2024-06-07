@@ -1,0 +1,11 @@
+@isTest
+static void  UpdateParentAccsQueueableTest{
+List<Account> queryAccounts = [SELECT Id,parentId FROM Account WHERE parentId=NULL];
+            Id getId = [SELECT Id FROM Account WHERE name='test account'][0].Id;
+      UpdateParentAccsQueueable Updateaccs = new UpdateParentAccsQueueable(accList,parentAccId);
+      ID jobID = System.enqueueJob(Updateaccs);
+List<Account> checkAccounts= [SELECT Id,parentId
+                                               FROM Account
+                                               Where Id =:queryAccounts];
+        System.Assert(checkAccounts[0].parentId == getId,'Account not updated');
+}
