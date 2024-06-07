@@ -1,0 +1,11 @@
+public class UpdateOppsSchedulable implements Schedulable{
+   public void execute(SchedulableContext SC) {
+        List<Opportunity> myOpportunities =  [Select Id,description FROM Opportunity LIMIT 5];
+          if(!myOpportunities.isEmpty()){
+       for(Opportunity opp : myOpportunities){
+           opp.description  = 'Updated opportunity with schedulable apex';
+       }
+       Update myOpportunities;
+   }
+   }
+}
