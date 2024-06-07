@@ -9,3 +9,9 @@ public class UpdateOppsSchedulable implements Schedulable{
    }
    }
 }
+
+
+2) Setup >Apex classes > Schedule Apex 
+provide : job name = UpdateOpportunities
+          Apex class = UpdateOppsSchedulable
+          etc
