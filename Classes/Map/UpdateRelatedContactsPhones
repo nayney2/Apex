@@ -1,0 +1,50 @@
+//Using Query
+public static void accountQuery()	{
+        List<Contact> contactsToUpdate = new List<Contact>();
+        List<Account> myAccs = [SELECT Id, Name,Phone, (SELECT Id, Name,Phone FROM Contacts) FROM Account 
+                                WHERE CreatedDate = LAST_WEEK And Phone !=null];
+        
+        if(!myAccs.isEmpty()){
+            for(Account acc : myAccs){
+                for(Contact con : acc.contacts){
+                    if (con.phone == null){
+                        con.phone = acc.phone ;
+                        contactsToUpdate.add(con);
+                    }
+                }
+            }
+        }
+        if(!contactsToUpdate.isEmpty()){
+            Update contactsToUpdate ;
+        }
+
+        
+        
+    }
+
+//Using Map
+    public static void accountMap()	{
+        List<Account> myAccs = [SELECT Id, Name,Phone, (SELECT Id,Phone FROM Contacts) FROM Account 
+                                WHERE CreatedDate = THIS_MONTH And Phone !=null LIMIT 1];
+        Map<Id,Account> contactsMap = new Map<Id,Account>();
+        List<Contact> contactsToUpdate = new List<Contact>();
+
+        contactsMap.putAll(myAccs);
+
+        if(!contactsMap.isEmpty()){
+            for(Account acc : contactsMap.values()){
+                for(Contact con : acc.contacts){
+                    if (con.phone == null){
+                        con.phone = acc.phone ;
+                        contactsToUpdate.add(con);
+                    }
+                }
+            }
+        }
+        if(!contactsToUpdate.isEmpty()){
+            Update contactsToUpdate ;
+        }
+
+        
+        
+    }  
