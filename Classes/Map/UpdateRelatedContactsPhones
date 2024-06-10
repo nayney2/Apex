@@ -25,7 +25,7 @@ public static void accountQuery()	{
 //Using Map
     public static void accountMap()	{
         List<Account> myAccs = [SELECT Id, Name,Phone, (SELECT Id,Phone FROM Contacts) FROM Account 
-                                WHERE CreatedDate = THIS_MONTH And Phone !=null LIMIT 1];
+                                WHERE CreatedDate = THIS_MONTH And Phone !=null];
         Map<Id,Account> contactsMap = new Map<Id,Account>();
         List<Contact> contactsToUpdate = new List<Contact>();
 
