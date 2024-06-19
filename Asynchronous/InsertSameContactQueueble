@@ -10,3 +10,22 @@ public class RelateSameContactQueueble implements Queueable{
               Insert contactsList;
                   }
 }
+//Another way 
+public class RelateSameContactQueueble implements Queueable{
+    private Contact con ;
+      private String industryValue  ;
+    public  QueuebleRelateSameContact(Contact con,String industryValue){
+        this.con =con;
+        this.industryValue = industryValue;
+    }
+        public void execute(QueueableContext context){
+            List<Account> MyAccs = [SELECT Id,Name FROM Account WHERE industry = :industryValue LIMIT 5];
+            List<Contact> contactsList = new List<Contact>();
+            for(Account acc : MyAccs){
+                  Contact c = con.clone(false,false,false,false);
+                  c.AccountId = acc.Id ;	
+                    contactsList.add(c);	                  
+              }       
+              Insert contactsList;
+        }
+}
