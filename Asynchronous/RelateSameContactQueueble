@@ -1,0 +1,12 @@
+public class RelateSameContactQueueble implements Queueable{
+    List<Account> MyAccs = [SELECT Id,Name FROM Account WHERE industry = 'Media' LIMIT 5];
+ 	List<Contact> contactsList = new List<Contact>();
+
+          public void execute(QueueableContext context){
+              for(Account acc : MyAccs){
+                  Contact con = new Contact(FirstName='Joanna', LastName='Smith',AccountId = acc.Id);
+                    contactsList.add(con);	                  
+              }       
+              Insert contactsList;
+                  }
+}
