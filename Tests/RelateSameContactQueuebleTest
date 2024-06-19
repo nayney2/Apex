@@ -1,0 +1,16 @@
+        @isTest    public static void insertSameContact(){
+             List<Account > myAccounts = new List<Account>();
+        for(integer i=0; i < = 5 ; i++){
+            Account myAccount = new Account();
+            myAccount.name = 'New Account Number : '+i;
+            myAccount.industry = 'Media';
+            myAccounts.add(myAccount);
+        }
+        Test.startTest();
+        insert myAccounts;
+        QueuebleRelateSameContact Qb = new QueuebleRelateSameContact();
+        ID jobID = System.enqueueJob(Qb);
+        Test.stopTest();   
+                List<Account> queryAccounts = [SELECT Id,(SELECT Id FROM Contacts) FROM Account WHERE Id =:myAccounts[0].Id];
+            System.assertEquals(1,queryAccounts[0].contacts.size(),'Related contacts not inserted');
+        }
