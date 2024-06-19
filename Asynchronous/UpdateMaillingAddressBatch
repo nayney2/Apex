@@ -3,6 +3,7 @@ public class BatchUpdateAddress implements Database.Batchable<sObject>{
         return Database.getQueryLocator([Select Id,Name,BillingCity, BillingState, BillingStreet, BillingCountry, BillingAddress,
                                          (SELECT MailingCountry, MailingCity, MailingStreet, MailingAddress,MailingState FROM Contacts) 
                                          FROM Account LIMIT 5]);
+   //Or  return Database.getQueryLocator('Select Id,Name,BillingCity, Billin...');
     }   
        public void execute(Database.BatchableContext bc, List<Account> MyAccs){
            List<Contact> UpdatedContacts = new List<Contact>();
