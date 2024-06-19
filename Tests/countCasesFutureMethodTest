@@ -1,0 +1,28 @@
+@isTest
+public class TestFutureMethod {
+    @isTest    public static void insertedCases(){
+        List<id> myIds = new List<Id>();
+	    List<Account> MyAccs = new List<Account>();
+            Account MyAcc = new Account();
+            MyAcc.name = 'Related Account';
+            MyAccs.add(MyAcc);
+          insert MyAccs;
+        for(Account acc: MyAccs){
+            myIds.add(acc.Id);
+        }
+        
+        List<Case> myCases = new List<Case>{
+                    new Case(description='first Case',Origin = 'web', priority ='High' ,AccountId = MyAccs[0].Id),
+                    new Case(description='second Case',Origin = 'web' , priority ='High' ,AccountId = MyAccs[0].Id),
+                    new Case(description='third Case',Origin = 'phone', priority ='High' ,AccountId = MyAccs[0].Id),
+            		new Case(description='fourth Case',Origin = 'email', priority ='High' ,AccountId = MyAccs[0].Id)};
+           Test.startTest();
+           insert myCases ;
+            CasesFutureClass.countCases(myIds);	
+           Test.stopTest();	
+      List<Account> queryAccounts = [SELECT phone_cases__c,email_cases__c,Web_Cases__c,(SELECT origin FROM Cases) FROM Account WHERE Id = :MyAccs[0].Id];
+            System.assertEquals(2,queryAccounts[0].Web_Cases__c,'Accounts web cases not updated');
+            System.assertEquals(1,queryAccounts[0].email_cases__c,'Accounts email cases not updated');
+            System.assertEquals(1,queryAccounts[0].phone_cases__c,'Accounts phone cases not updated');		
+        }
+}
