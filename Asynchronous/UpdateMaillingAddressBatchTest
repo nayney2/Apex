@@ -1,0 +1,28 @@
+    @isTest
+public class TestFutureMethod {
+  @isTest    
+public static void UpdateMailingAddressBatch(){
+            List<Account> MyAccs = new List<Account>();
+            Account MyAcc = new Account();
+            MyAcc.name = 'Related Account';
+        	Myacc.BillingCountry= 'Morocco';
+            Myacc.BillingCity = 'Settat';
+            Myacc.BillingState = 'Casablanca';
+            Myacc.BillingStreet = 'El kassam';
+            MyAccs.add(MyAcc);
+          insert MyAccs;
+        List<Contact> myContacts = new List<Contact>{
+            new Contact (FirstName='Joe', LastName='Smith', Department='Finance',AccountId =MyAccs[0].Id ),
+            new Contact (FirstName='Kathy', LastName='Smith', Department='Technology',AccountId =MyAccs[0].Id),
+            new Contact (FirstName='Caroline', LastName='Roth', Department='Finance',AccountId =MyAccs[0].Id)
+        };
+        Test.startTest();
+        insert myContacts;
+        BatchUpdateAddress Address = new BatchUpdateAddress();
+        Id BatchId = Database.executeBatch(Address);
+        Test.stopTest();   
+        
+        List<Contact> queryContacts = [SELECT MailingCountry, MailingCity FROM Contact];
+        System.assertEquals('Morocco',queryContacts[0].MailingCountry,'Contacts Mailing country has not been updated');
+        System.assertEquals('Settat',queryContacts[0].MailingCity ,'Contacts Mailing dcity has not been updated');	
+    }}
