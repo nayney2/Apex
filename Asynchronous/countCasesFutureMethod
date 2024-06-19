@@ -1,0 +1,26 @@
+public class CasesFutureClass {
+    @Future
+    public static void countCases(List<Id> AccountIds){
+        Integer totalPhone = 0;
+        Integer totalWeb = 0;
+        Integer totalEmail = 0;
+        List<Account> queryAccounts = [SELECT phone_cases__c,email_cases__c,Web_Cases__c,(SELECT origin FROM Cases) FROM Account WHERE Id IN :AccountIds];
+        if(!queryAccounts.isEmpty()){
+        for(Account myAcc: queryAccounts){
+            for(Case myCase : myAcc.cases){
+            if(myCase.origin =='phone'){
+                totalPhone = totalPhone + 1 ; 
+            }else if(myCase.origin =='web'){
+                totalWeb = totalWeb + 1 ;
+            }else if(myCase.origin =='email'){
+                totalEmail = totalEmail + 1;
+            }  
+            myAcc.phone_cases__c = totalPhone;
+            myAcc.email_cases__c =totalEmail ;
+            myAcc.Web_Cases__c	 =totalWeb ;
+        }}}
+        Update queryAccounts ;
+        
+    }
+ 
+}
