@@ -11,7 +11,7 @@ public class UpdateOppsSchedulable implements Schedulable{
 }
 
 
-2) Setup >Apex classes > Schedule Apex 
+2) Setup >Apex classes > Schedule Apex                          // OR Using CRON
 provide : job name = UpdateOpportunities
           Apex class = UpdateOppsSchedulable
           etc
