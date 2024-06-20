@@ -1,0 +1,19 @@
+public class ScheduledTaskReminder implements Schedulable{
+    public void execute(SchedulableContext context){
+        List<Task> myTasks = new List<Task>();
+    	List<Opportunity> myOpps = [SELECT Id, name,IsClosed, CloseDate,OwnerId 
+                                    FROM OPPORTUNITY
+                                   WHERE IsClosed=false AND CloseDate < Today LIMIT 5];
+                  for(Opportunity opp : myOpps){
+                          Task myTask = new Task();
+                          myTask.WhatId = opp.Id ;
+                          myTask.status = 'In progress' ;
+                          myTask.subject = 'Related task' ;
+                          myTask.OwnerId = opp.OwnerId ;
+                          myTasks.add(myTask);
+                      }  
+        if(!myTasks.isEmpty()){
+            Insert myTasks;
+        }
+    }
+}
