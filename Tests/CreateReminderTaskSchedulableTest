@@ -1,0 +1,21 @@
+    @isTest  private static void insertTasks(){
+        String sch = '0 0 0 15 7 ? 2024'; 
+         List<Opportunity> myOpportunities = new List<Opportunity>();
+                for(integer i=1; i < = 5 ; i++){
+            Opportunity opp = new Opportunity();
+            opp.Name = 'Related opp '+i;
+            opp.StageName = 'Prospecting';
+            opp.CloseDate = date.today()-1;
+            opp.stageName = 'open';        
+            myOpportunities.add(opp);
+                }
+            insert myOpportunities;
+			Test.startTest();
+            String jobID = System.schedule('Insert tasks',sch,new ScheduledTaskReminder());
+            Test.stopTest();       
+   			List<Opportunity> queryOpportunities = [SELECT Id, (SELECT Id FROM Tasks) 
+                                                    FROM Opportunity
+                                                    WHERE Id =:myOpportunities[0].Id];
+                System.assertEquals(1,queryOpportunities[0].Tasks.size(),'Related tasks not inserted');
+
+    }
