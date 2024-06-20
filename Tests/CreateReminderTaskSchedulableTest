@@ -17,5 +17,7 @@
                                                     FROM Opportunity
                                                     WHERE Id =:myOpportunities[0].Id];
                 System.assertEquals(1,queryOpportunities[0].Tasks.size(),'Related tasks not inserted');
-
+	// OR 
+        // List<Task> queryTasks = [SELECT Id FROM Task WHERE WhatId =: myIds[0]];
+        //   System.assertEquals(1,queryTasks.size(),'Related tasks not inserted');
     }
