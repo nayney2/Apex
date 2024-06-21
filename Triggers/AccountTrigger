@@ -2,6 +2,7 @@ trigger AccountTrigger on Account (before insert,after insert,before update,afte
     if(trigger.isInsert){
         if(trigger.isBefore){
            AccountTriggerHandler.updateRating(Trigger.new); 
+            AccountTriggerHandler.CopyAddress(Trigger.new); 
         	// AccountTriggerHandler.beforeInsertAndUpdate(Trigger.new,null); 
         }
         else if(trigger.isAfter){
