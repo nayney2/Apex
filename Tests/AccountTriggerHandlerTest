@@ -57,4 +57,29 @@ private class TestClass {
         System.AssertEquals(1,checkAccounts[0].Contacts.size() ,'Contacts not inserted');
         System.AssertEquals(1,checkAccounts[0].opportunities.size() ,'Opportunities not inserted');
     }
+    @isTest    public static void accountPhoneValues(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test 591';
+        myAccount.phone = '546' ;
+        myAccounts.add(myAccount);
+        Test.startTest();
+        insert myAccounts;
+        for(Account a : myAccounts){
+            if(a.Id ==myAccounts[0].Id ){
+                myAccount.phone = '999' ;
+            }
+        }
+        update myAccounts;
+        Test.stopTest();
+        
+        List<Account> checkAccounts= [SELECT Id,description
+                                      FROM Account
+                                      Where Id =:myAccounts[0].id];
+        
+        System.Assert(checkAccounts[0].description !=null,'Account not updated');
+//OR 
+//System.Assert(checkAccounts[0].PHONE =='999','Account not updated');
+        
+    }
 }
