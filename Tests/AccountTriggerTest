@@ -1,0 +1,22 @@
+@isTest
+private class TestClass {
+    @isTest static void beforeInsertTest(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test class name';
+        myAccount.industry = 'Media';
+        myAccounts.add(myAccount);
+        Test.startTest();
+        insert myAccounts;
+        //In updation case
+        //for(Account acc : myAccounts){
+        // acc.industry = 'Media';}
+        //update myAccounts ;        
+        Test.stopTest();
+        List<Account> queryAccounts= [Select Id,rating FROM Account Where Id IN :myAccounts] ;
+        for(Account acc : queryAccounts){
+            System.Assert(acc.rating=='Hot','Account Rating has not been updated ');            }
+        // Or
+        // System.AssertEquals('Hot',queryAccounts[0].rating);  
+    }
+}
