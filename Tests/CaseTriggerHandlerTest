@@ -1,4 +1,5 @@
-    @isTest    public static void latestCaseNumberTest(){
+@isTest
+private class TestClass {    @isTest    public static void latestCaseNumberTest(){
         List<Account> myAccounts= new List<Account>();
         List<Case> myCases = new List<Case>();
         Account myAccount = new Account();
@@ -16,4 +17,4 @@
                                                Where Id IN :myCases];
         System.AssertEquals(checkCases[0].CaseNumber,checkCases[0].Account.Latest_Case_Number__c ,'Account not updated');
 
-    }
+    }}
