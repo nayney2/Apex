@@ -1,0 +1,10 @@
+trigger CaseTrigger on Case (before insert,after insert) {
+ if(trigger.isInsert){
+        if(trigger.isBefore){
+           
+        }
+        else if(trigger.isAfter){
+            CaseTriggerHandler.latestCaseNumber(Trigger.new);
+        }
+ }
+}
