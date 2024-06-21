@@ -36,4 +36,15 @@ public class AccountTriggerHandler{
         Insert conList;
         Insert myOpportunities;
     }
+        public static void accountPhoneValues(List<Account> accList,Map<Id,Account> mapList){
+         List<Account> myAccounts= new List<Account>();
+            
+            for(Account acc: accList){
+                    if(acc.phone !=null && (acc.phone != mapList.get(acc.Id).phone)){
+                    acc.description = 'Phone is Updated!'+'Old value: '+mapList.get(acc.Id).phone+'& New value: '+acc.phone;
+                }
+                if(!accList.isEmpty()){
+                    Update accList;
+                }
+        }}
 }
