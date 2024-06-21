@@ -38,4 +38,25 @@ private class TestClass {
                                                Where Id IN :myAccounts];
         System.AssertEquals('Egypt',checkAccounts[0].ShippingCountry ,'Account not updated');
     }
+    @isTest    public static void createOpportunityOrContact(){
+         List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test 1';
+        myAccount.New_Opportunity__c = true;
+        myAccount.active__c = 'yes' ;
+        myAccounts.add(myAccount);
+                Account secAccount = new Account();
+        secAccount.name = 'Test 2';
+        secAccount.New_Contact__c = true;
+        myAccounts.add(secAccount);
+        insert myAccounts;
+         List<Account> checkAccounts= [SELECT Id,(SELECT Id FROM Contacts ),(SELECT Id FROM opportunities)
+                                               FROM Account
+                                               Where Id =:myAccounts[0].id];
+                List<Contact> myContacts  = [SELECT Id FROM Contact
+                                               Where AccountId =:myAccounts[1].id];
+
+        System.AssertEquals(1,myContacts.size() ,'Contacts not inserted');
+        System.AssertEquals(1,checkAccounts[0].opportunities.size() ,'Opportunities not inserted');
+    }
 }
