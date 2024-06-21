@@ -1,0 +1,21 @@
+@isTest
+private class TestClass {
+@isTest static void UpdateOppDescriptionTest(){
+        List<Opportunity> myOpportunities = new List<Opportunity>();
+        for(integer i=0;i<2;i++){
+            Opportunity opp = new Opportunity();
+                opp.name = 'test 00'+i;
+            opp.closeDate=date.today();
+                opp.stageName='prospecting';
+            opp.amount = 300000;
+            myOpportunities.add(opp);
+        }
+        Test.startTest();
+        Insert myOpportunities;
+        Test.stopTest();
+        List<Opportunity> queryOpportunities= [SELECT Id,description
+                                               FROM Opportunity
+                                               Where Id =:myOpportunities];
+        System.AssertEquals('Hot opportunity',queryOpportunities[0].description ,'Opportunity not updated');
+    }
+}
