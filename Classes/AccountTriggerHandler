@@ -20,7 +20,7 @@ public class AccountTriggerHandler{
         List<Contact> conList = new List<Contact>();
         List<Opportunity> myOpportunities = new List<Opportunity>();
         for (Account acc: accList){
-            if(acc.New_Opportunity__c&& acc.active__c == 'yes'){
+            if(acc.New_Opportunity__c && acc.active__c == 'yes'){
             Opportunity opp = new Opportunity();
             opp.AccountId = acc.Id;
             opp.Name = 'Related opp 001';
@@ -28,8 +28,8 @@ public class AccountTriggerHandler{
             opp.CloseDate = date.today();
             myOpportunities.add(opp);
             
-            }else if(acc.New_Contact__c	){
-                conList = new List<Contact>{
+            }if(acc.New_Contact__c	){
+  conList = new List<Contact>{
                     new Contact (FirstName='Oe', LastName='Lee', AccountId = acc.Id)};
                     
                         }}
