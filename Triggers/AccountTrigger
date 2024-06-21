@@ -1,0 +1,12 @@
+trigger AccountTrigger on Account (before insert,after insert,before update,after update,before delete,after delete) {
+    if(trigger.isInsert){
+        if(trigger.isBefore){
+           AccountTriggerHandler.updateRating(Trigger.new); 
+        	// AccountTriggerHandler.beforeInsertAndUpdate(Trigger.new,null); 
+        }
+        else if(trigger.isAfter){
+       //     AccountTriggerHandler.afterInsert(Trigger.new);
+          //  AccountTriggerHandler.insertAccountWithOpps(Trigger.new);
+        }
+    }
+}
