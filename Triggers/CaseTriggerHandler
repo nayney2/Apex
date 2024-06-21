@@ -1,0 +1,14 @@
+public class CaseTriggerHandler {
+    public static void latestCaseNumber(List<Case> myCases){
+        List<Account> myAccounts = new List<Account>();
+        for(Case myCase : myCases){
+            if(myCase.AccountId !=null ){
+                Account acc = new Account();
+            acc.Latest_Case_Number__c= myCase.CaseNumber	 ;
+            acc.Id = myCase.AccountId;
+            myAccounts.add(acc);}
+        }
+        Update myAccounts;
+        
+    }
+}
