@@ -6,6 +6,7 @@ trigger AccountTrigger on Account (before insert,after insert,before update,afte
         	// AccountTriggerHandler.beforeInsertAndUpdate(Trigger.new,null); 
         }
         else if(trigger.isAfter){
+            AccountTriggerHandler.createOpportunityOrContact(Trigger.new); 
        //     AccountTriggerHandler.afterInsert(Trigger.new);
           //  AccountTriggerHandler.insertAccountWithOpps(Trigger.new);
         }
