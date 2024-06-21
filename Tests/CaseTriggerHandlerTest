@@ -1,0 +1,19 @@
+    @isTest    public static void latestCaseNumberTest(){
+        List<Account> myAccounts= new List<Account>();
+        List<Case> myCases = new List<Case>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test class name';
+        myAccounts.add(myAccount);
+        insert myAccounts;
+        Case myCase = new Case(Origin = 'web',status = 'new', priority ='High' ,AccountId = myAccounts[0].Id);
+        myCases.add(myCase);
+        Test.startTest();
+        insert myCases ;
+        Test.stopTest();
+        
+        List<Case> checkCases= [SELECT Id,CaseNumber,Account.Latest_Case_Number__c 
+                                               FROM Case
+                                               Where Id IN :myCases];
+        System.AssertEquals(checkCases[0].CaseNumber,checkCases[0].Account.Latest_Case_Number__c ,'Account not updated');
+
+    }
