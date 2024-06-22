@@ -18,4 +18,29 @@ private class TestClass {
                                                Where Id =:myOpportunities];
         System.AssertEquals('Hot opportunity',queryOpportunities[0].description ,'Opportunity not updated');
     }
+  @isTest    public static void updateOpportunityDescription(){
+        List<Opportunity> myOpportunities = new List<Opportunity>();
+        Opportunity opp = new Opportunity();
+        opp.Name = 'Opp 111';
+        opp.StageName = 'Prospecting';
+        opp.CloseDate = date.today();
+        myOpportunities.add(opp);
+        Opportunity secOpp = new Opportunity();
+        secOpp.Name = 'Opp 222';
+        secOpp.StageName = 'Qualification';
+        secOpp.CloseDate = date.today();
+        myOpportunities.add(secOpp);
+        insert myOpportunities;
+        for(Opportunity o : myOpportunities){
+            if(o.Name == 'Opp 222'){
+                o.StageName = 'Closed Lost';}
+        }  
+        Test.startTest();
+        Update myOpportunities ;
+        Test.stopTest();
+        List<Opportunity> queryOpportunities = [SELECT Id,Description FROM OPPORTUNITY
+                                                WHERE id IN :myOpportunities];
+        System.AssertEquals('Opportunity is Open',queryOpportunities[0].description ,'Opportunity not inserted');
+        System.AssertEquals('Opportunity is Closed Lost',queryOpportunities[1].Description,'Opportunity not updated'); 
+    }
 }
