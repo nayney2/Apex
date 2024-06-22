@@ -2,7 +2,7 @@ trigger AccountTrigger on Account (before insert,after insert,before update,afte
     if(trigger.isInsert){
         if(trigger.isBefore){
            AccountTriggerHandler.updateRating(Trigger.new); 
-            AccountTriggerHandler.CopyAddress(Trigger.new); 
+            AccountTriggerHandler.CopyAddress(Trigger.new,null); 
         	// AccountTriggerHandler.beforeInsertAndUpdate(Trigger.new,null); 
         }
         else if(trigger.isAfter){
@@ -14,6 +14,7 @@ trigger AccountTrigger on Account (before insert,after insert,before update,afte
     if(trigger.isUpdate){
         if(trigger.isBefore){
                     AccountTriggerHandler.accountPhoneValues(Trigger.new,Trigger.oldMap);
+            AccountTriggerHandler.CopyAddress(Trigger.new,Trigger.oldMap); 
          //   AccountTriggerHandler.UpdateDescriptionV2(Trigger.new,Trigger.oldMap); 
          //   AccountTriggerHandler.beforeInsertAndUpdate(Trigger.new,Trigger.oldMap); 
             
