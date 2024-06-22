@@ -19,24 +19,42 @@ private class TestClass {
         // Or
         // System.AssertEquals('Hot',queryAccounts[0].rating);  
     }
-    @isTest  static void CopyAddressTest(){
+        @isTest    public static void CopyAddressTest(){
         List<Account> myAccounts= new List<Account>();
-            Account myAccount = new Account();
-            myAccount.name = 'Test Acc';
-            myAccount.CopyBillingAddressTo__c = true ;
-            myAccount.BillingCountry='Egypt'; 
-            myAccount.BillingCity ='Alexandria' ;
-            myAccount.BillingStreet='Sidi Gaber';
-            myAccount.BillingState='Alexandria' ;
-            myAccount.BillingPostalCode = '11522' ;
-            myAccounts.add(myAccount);
+        Account myAccount = new Account();
+        myAccount.name = 'Test Acc';
+        myAccount.CopyBillingAddressTo__c = true ;
+        myAccount.BillingCountry='Egypt'; 
+        myAccount.BillingCity ='Alexandria' ;
+        myAccount.BillingStreet='Sidi Gaber';
+        myAccount.BillingState='Alexandria' ;
+        myAccount.BillingPostalCode = '11522' ;
+        myAccounts.add(myAccount);
+        Account secAccount = new Account();
+        secAccount.name = 'Test Acc 2';
+        secAccount.CopyBillingAddressTo__c = false;
+        secAccount.BillingCountry='Egypt 2'; 
+        secAccount.BillingCity ='Alexandria' ;
+        secAccount.BillingStreet='Sidi Gaber 2';
+        secAccount.BillingState='Alexandria 2' ;
+        secAccount.BillingPostalCode = '11544' ;
+        myAccounts.add(secAccount);
         Test.startTest();
         insert myAccounts;
+            for(Account acc : myAccounts){
+                if(acc.BillingPostalCode == '11544'){
+                 acc.BillingCity ='Cairo' ;
+                 acc.CopyBillingAddressTo__c = true ;}
+
+            }
+                    Update myAccounts;
         Test.stopTest();
-           List<Account> checkAccounts= [SELECT Id,ShippingCountry 
-                                               FROM Account
-                                               Where Id IN :myAccounts];
-        System.AssertEquals('Egypt',checkAccounts[0].ShippingCountry ,'Account not updated');
+        List<Account> checkAccounts= [SELECT Id,ShippingCity
+                                      FROM Account
+                                      Where Id IN :myAccounts];
+        System.AssertEquals('Alexandria',checkAccounts[0].ShippingCity ,'Account not inserted');
+                    System.AssertEquals('Cairo',checkAccounts[1].ShippingCity ,'Account not updated');
+
     }
      @isTest    public static void createOpportunityOrContact(){
          List<Account> myAccounts= new List<Account>();
