@@ -1,7 +1,8 @@
 public class AccountTriggerHandler{
    public static void beforeInsert(List<Account> accList,Map<Id,Account> accMap){
         for(Account acc : accList){
-            if((accMap == null && (acc.Industry== 'Media' || acc.Industry== 'Energy')) || (accMap.get(acc.Id).Industry!=acc.Industry && (acc.Industry== 'Media' || acc.Industry== 'Energy')) ){
+            if((accMap == null && (acc.Industry== 'Media' || acc.Industry== 'Energy')) || 
+            (accMap.get(acc.Id).Industry!=acc.Industry && (acc.Industry== 'Media' || acc.Industry== 'Energy')) ){
                 acc.Rating = 'Hot';
             }}}
     public static void CopyAddress(List<Account> accList){
