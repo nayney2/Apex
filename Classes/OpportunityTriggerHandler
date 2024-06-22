@@ -6,4 +6,20 @@ public class OpportunityTriggerHandler {
             }
         } 
     }
+    public static void updateOpportunityDescription(List<Opportunity> oppList, Map<Id,Opportunity> MapOpp){
+        for(Opportunity opp :oppList){
+            if(MapOpp == null || (MapOpp != null  && opp.StageName!= MapOpp.get(opp.Id).StageName && opp.StageName!=null) ){
+                if(opp.StageName == 'Closed Lost'){
+                    opp.Description = 'Opportunity is Closed Lost';
+                }
+                else if(opp.StageName == 'Closed Won'){
+                    opp.Description = 'Opportunity is Closed Won';
+                }
+                if(opp.StageName != 'Closed Lost' && opp.StageName != 'Closed Won'){
+                    opp.Description = 'Opportunity is Open';
+                }
+                
+            }
+        }
+    }
 }
