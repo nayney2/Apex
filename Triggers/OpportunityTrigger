@@ -1,9 +1,23 @@
 trigger OpportunityTrigger on Opportunity (before insert,after update) {
-	  if(trigger.isUpdate){
+	  if(trigger.isInsert){
         if(trigger.isBefore){
-            OpportunityTriggerHandler.updateOppDescription(Trigger.new);
+       //     OpportunityTriggerHandler.updateOppDescription(Trigger.new);
+            OpportunityTriggerHandler.updateOpportunityDescription(Trigger.new,null);
         }
         else if(trigger.isAfter){
+           // if(!RecursionVar.firstCall){
+          //      RecursionVar.firstCall =true ;
+        //	OpportunityTriggerHandler.updateOpp(Trigger.new,Trigger.oldMap);
+          //  }
+
+        }}	  
+if(trigger.isUpdate){
+        if(trigger.isBefore){
+            OpportunityTriggerHandler.updateOppDescription(Trigger.new);
+                       OpportunityTriggerHandler.updateOpportunityDescription(Trigger.new,Trigger.oldMap);
+
+        }
+        if(trigger.isAfter){
            // if(!RecursionVar.firstCall){
           //      RecursionVar.firstCall =true ;
         //	OpportunityTriggerHandler.updateOpp(Trigger.new,Trigger.oldMap);
