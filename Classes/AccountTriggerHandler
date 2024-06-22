@@ -43,8 +43,20 @@ public class AccountTriggerHandler{
                     if(acc.phone !=null && (acc.phone != mapList.get(acc.Id).phone)){
                     acc.description = 'Phone is Updated!'+'Old value: '+mapList.get(acc.Id).phone+'& New value: '+acc.phone;
                 }
-                if(!accList.isEmpty()){
-                    Update accList;
-                }
         }}
+    public static void CopyAddress(List<Account> accList,Map<Id,Account> mapList){
+        for(Account acc : accList){
+           // if(acc.CopyBillingAddressTo__c = true && acc.BillingCountry!=null && acc.BillingCity!=null && acc.BillingStreet!=null && acc.BillingState!=null && acc.BillingPostalCode!=null){ 
+           // OR
+                if((acc.CopyBillingAddressTo__c && mapList ==null && acc.BillingCountry!=null && acc.BillingCity!=null && acc.BillingStreet!=null && acc.BillingState!=null && acc.BillingPostalCode!=null) 
+                   || (acc.CopyBillingAddressTo__c && acc.CopyBillingAddressTo__c != mapList.get(acc.Id).CopyBillingAddressTo__c  && mapList.get(acc.Id).BillingCountry!=null  && mapList.get(acc.Id).BillingCity!=null  && mapList.get(acc.Id).BillingStreet!=null && mapList.get(acc.Id).BillingState !=null &&  mapList.get(acc.Id).BillingPostalCode!=null)){
+                   acc.ShippingStreet = acc.BillingStreet;
+                acc.ShippingCity=acc.BillingCity ;
+                acc.ShippingState= acc.BillingState;
+                acc.ShippingPostalCode= acc.BillingPostalCode; 
+                acc.ShippingCountry = acc.BillingCountry;
+            }
+        }
+
+    }
 }
