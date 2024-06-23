@@ -170,9 +170,13 @@ private class TestClass {
             Update myAccounts;
         }catch(DMLexception e){
             System.debug(e.getMessage());
+	//OR
+	// Boolean  exp = (e.getMessage().contains('Accounts cannot be updated')) ? true : false 	;
+             //     System.AssertEquals(true,exp,'Account not Updated');
         }
         List<Account> queryAccounts = [SELECT Id,active__c FROM Account
                                        WHERE id IN :myAccounts];
         System.AssertEquals('Yes',queryAccounts[0].active__c ,'Account not Updated');
     }
+
 }
