@@ -18,6 +18,7 @@ if(trigger.isUpdate){
 
         }
         if(trigger.isAfter){
+            OpportunityTriggerHandler.createRelatedTask(Trigger.new,Trigger.oldMap);
            // if(!RecursionVar.firstCall){
           //      RecursionVar.firstCall =true ;
         //	OpportunityTriggerHandler.updateOpp(Trigger.new,Trigger.oldMap);
