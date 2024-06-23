@@ -112,14 +112,12 @@ public class AccountTriggerHandler{
                 for(Contact con : [SELECT Id FROM Contact WHERE AccountId IN :mapAcc.keyset()]){
                 if(mapList !=null  && acc.BillingCountry!=null  && acc.BillingCity!=null  && acc.BillingStreet!=null && acc.BillingState !=null &&  acc.BillingPostalCode!=null
                   && (acc.BillingCountry!= mapList.get(acc.Id).BillingCountry  || acc.BillingCity!= mapList.get(acc.Id).BillingCity  || acc.BillingStreet!=mapList.get(acc.Id).BillingStreet || acc.BillingState !=mapList.get(acc.Id).BillingState || acc.BillingPostalCode!= mapList.get(acc.Id).BillingPostalCode)){
-                   Contact c = new Contact();
-                      c.Id = con.Id;
-                      c.mailingStreet = acc.BillingStreet;
-                c.mailingCity=acc.BillingCity ;
-                c.mailingState= acc.BillingState;
-                c.mailingPostalCode= acc.BillingPostalCode; 
-                c.mailingCountry = acc.BillingCountry;
-                      contactsToUpdate.add(c);
+                   con.mailingStreet = acc.BillingStreet;
+                con.mailingCity=acc.BillingCity ;
+                con.mailingState= acc.BillingState;
+                con.mailingPostalCode= acc.BillingPostalCode; 
+                con.mailingCountry = acc.BillingCountry;
+                      contactsToUpdate.add(con);
                 }}
         }
             Update contactsToUpdate;
