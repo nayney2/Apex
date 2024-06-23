@@ -57,7 +57,7 @@ private class TestClass {
         Update myOpportunities;
         Test.stopTest();  
          List<Task> queryTask= [SELECT Id FROM Task
-                                               Where whatId =:myOpportunities[0].id];
+                                               Where whatId  IN :myOpportunities];
         System.AssertEquals(1,queryTask.size() ,'Task not updated');
     }
 }
