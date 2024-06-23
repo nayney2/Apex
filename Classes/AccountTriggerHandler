@@ -80,4 +80,25 @@ public class AccountTriggerHandler{
         }
         Update contactsToUpdate;
     }
+//Using Map : Update account-related contacts' phone numbers with the account phone number
+            public static void updateContactsPhoneUsingMap(List<Account> accList, Map<Id,Account> MapAcc){
+            List<Account> myAccounts = [SELECT Id, Phone,(SELECT Id,Phone FROM Contacts) FROM Account 
+                                       WHERE Id IN :accList];
+                Map<Id,Account> newMap = new Map<Id,Account>(myAccounts);
+                
+        List<Contact> contactsToUpdate = new List<Contact>();
+        for(Account acc : newMap.values()){
+            if(acc.phone != MapAcc.get(acc.id).phone && acc.phone !=null && MapAcc!=null){
+                if(!acc.contacts.isEmpty()){
+                    for(Contact con : acc.contacts ){
+                        Contact c = new Contact ();
+                       c.Id = con.Id;
+                        c.Phone	= acc.phone ;
+                        contactsToUpdate.add(c);
+                    }
+                }
+            }
+        }
+        Update contactsToUpdate;
+    }
 }
