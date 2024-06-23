@@ -104,4 +104,26 @@ private class TestClass {
 //System.Assert(checkAccounts[0].PHONE =='999','Account not updated');
         
     }
+        @isTest   public static void updateContactsPhoneUsingMapTest(){
+        List<Account> myAccounts= new List<Account>();
+        List<Contact> conList = new List<Contact>( );
+        Account myAccount = new Account();
+        myAccount.name = 'Test 999';
+        myAccount.phone = '546' ;
+        myAccounts.add(myAccount);
+        insert myAccounts;
+        conList = new List<Contact> {new Contact(FirstName='First', LastName='Contact 999', AccountId = myAccounts[0].id)};
+            Insert conList;
+        for(Account a : myAccounts){
+                a.phone = '999' ;
+        }
+        Test.startTest();	
+        update myAccounts;
+        Test.stopTest();
+        
+        List<Contact> checkContacts= [SELECT Id,Phone FROM Contact
+                                      Where AccountId IN :myAccounts];
+        
+           System.AssertEquals('999',checkContacts[0].Phone	,'Contact not updated');   
+    }
 }
