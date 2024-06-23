@@ -132,4 +132,13 @@ public class AccountTriggerHandler{
 
         }
         }}
+    public static void preventAccountUpdate(List<Account> accList,Map<Id,Account> MapAcc){
+        for(Account acc: accList){
+            datetime now = date.today();
+            if( acc.CreatedDate.day() <= now.day()){
+             // acc.addError('Accounts cannot be updated');
+              acc.addError(label.Wait);
+
+        }
+        }}
 }
