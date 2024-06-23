@@ -62,7 +62,7 @@ public class AccountTriggerHandler{
     }
 }
 //Update account-related contacts' phone numbers with the account phone number
-        public static void updateContactsPhoneUsingMap(List<Account> accList, Map<Id,Account> MapAcc){
+        public static void updateContactsPhone(List<Account> accList, Map<Id,Account> MapAcc){
             List<Account> myAccounts = [SELECT Id, Phone,(SELECT Id,Phone FROM Contacts) FROM Account 
                                        WHERE Id IN :accList];
         List<Contact> contactsToUpdate = new List<Contact>();
