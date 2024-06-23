@@ -104,7 +104,7 @@ private class TestClass {
 //System.Assert(checkAccounts[0].PHONE =='999','Account not updated');
         
     }
-        @isTest   public static void updateContactsPhoneUsingMapTest(){
+        @isTest   public static void updateContactsPhoneTest(){
         List<Account> myAccounts= new List<Account>();
         List<Contact> conList = new List<Contact>( );
         Account myAccount = new Account();
