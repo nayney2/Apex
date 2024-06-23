@@ -171,7 +171,7 @@ private class TestClass {
         }catch(DMLexception e){
             System.debug(e.getMessage());
 	//OR
-	// Boolean  exp = (e.getMessage().contains('Accounts cannot be updated')) ? true : false ;  //'Accounts cannot be updated' is the addError message
+	// Boolean  exp = (e.getMessage().contains('Accounts cannot be updated')) ? true : false ;  //when using addError('Accounts cannot be updated')
              //     System.AssertEquals(true,exp,'Account not Updated');
         }
         List<Account> queryAccounts = [SELECT Id,active__c FROM Account
