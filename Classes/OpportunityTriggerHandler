@@ -37,4 +37,11 @@ public class OpportunityTriggerHandler {
         Insert myTasks ;	
         
     }
+        public static void preventCreationOfoppWithoutAmount(List<Opportunity> oppList){
+        for(Opportunity opp: oppList){
+            if( opp.amount == null){
+              opp.addError('Opportunities with null amount cannot be updated');
+
+        }
+        }}
 }
