@@ -123,4 +123,10 @@ public class AccountTriggerHandler{
             Update contactsToUpdate;
 
     }
+    public static void preventAccountDeletion(List<Account> accList){
+        for(Account acc: accList){
+            if(acc.active__c == 'yes'){
+                acc.addError('Active accounts cannot be deleted');
+        }
+        }}
 }
