@@ -27,10 +27,10 @@ public class OpportunityTriggerHandler {
         for(Opportunity opp :oppList){
             if( opp.stageName != MapOpp.get(opp.id).stageName){
                   Task myTask = new Task();
-                          myTask.WhatId = opp.Id ;
+                          myTask.WhatId = opp.Id ;  //related to 
                           myTask.status = 'In progress' ;
                           myTask.subject = 'Related task' ;
-                          myTask.OwnerId = opp.OwnerId ;
+                          myTask.OwnerId = opp.OwnerId ;  //OR Userinfo.getUserId() ;
                           myTasks.add(myTask);
             }
         } 
