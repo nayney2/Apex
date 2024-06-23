@@ -43,4 +43,21 @@ private class TestClass {
         System.AssertEquals('Opportunity is Open',queryOpportunities[0].description ,'Opportunity not inserted');
         System.AssertEquals('Opportunity is Closed Lost',queryOpportunities[1].Description,'Opportunity not updated'); 
     }
+        @isTest static void createRelatedTaskTest(){
+        List<Opportunity> myOpportunities = new List<Opportunity>();
+            Opportunity opp = new Opportunity(
+                name = 'twix',closeDate=date.today(),
+                stageName='Close lost');
+            myOpportunities.add(opp);
+        Insert myOpportunities;
+            for(Opportunity op : myOpportunities){
+                op.stageName='Close won';
+            }
+        Test.startTest();
+        Update myOpportunities;
+        Test.stopTest();  
+         List<Task> queryTask= [SELECT Id FROM Task
+                                               Where whatId =:myOpportunities[0].id];
+        System.AssertEquals(1,queryTask.size() ,'Task not updated');
+    }
 }
