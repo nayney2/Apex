@@ -156,4 +156,23 @@ private class TestClass {
                                                 WHERE id IN :myAccounts];
         System.AssertEquals(1,queryAccounts.size() ,'Account not deleted');
     }
+        @isTest static void preventAccountUpdateTest(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'right';
+        myAccount.active__c = 'Yes';            
+        myAccounts.add(myAccount);
+        insert myAccounts;
+        try{
+            for(Account acc : myAccounts){
+                    acc.active__c = 'no';            
+        }
+            Update myAccounts;
+        }catch(DMLexception e){
+            System.debug(e.getMessage());
+        }
+        List<Account> queryAccounts = [SELECT Id,active__c FROM Account
+                                       WHERE id IN :myAccounts];
+        System.AssertEquals('Yes',queryAccounts[0].active__c ,'Account not Updated');
+    }
 }
