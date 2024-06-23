@@ -31,4 +31,13 @@ trigger AccountTrigger on Account (before insert,after insert,before update,afte
         //}
         }
     }
+ if(trigger.isDelete){
+        if(trigger.isBefore){ 
+            AccountTriggerHandler.preventAccountDeletion(Trigger.old); 
+       //     AccountTriggerHandler.DeleteAccount(Trigger.old); 
+            
+        }
+        if(trigger.isAfter){
+        }
+    }
 }
