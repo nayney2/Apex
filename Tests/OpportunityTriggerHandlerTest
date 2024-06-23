@@ -60,4 +60,17 @@ private class TestClass {
                                                Where whatId  IN :myOpportunities];
         System.AssertEquals(1,queryTask.size() ,'Task not updated');
     }
+    @isTest static void preventCreationOfoppWithoutAmountTest(){
+         List<Opportunity> myOpportunities = new List<Opportunity>();
+        Opportunity opp = new Opportunity(
+            name = 'test',closeDate=date.today(),
+            stageName='Prospecting');
+        myOpportunities.add(opp);
+        try{
+                    Insert myOpportunities;
+        }catch(DMLexception e){
+            Boolean  exp = (e.getMessage().contains('Opportunities with null amount cannot be updated')) ? true : false 	;
+                  System.AssertEquals(true,exp,'Account not Updated');
+        }
+    }
 }
