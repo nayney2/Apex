@@ -126,4 +126,34 @@ private class TestClass {
         
            System.AssertEquals('999',checkContacts[0].Phone	,'Contact not updated');   
     }
+//The next test code works fine but its status not 'passed'
+    @isTest static void preventAccountDeletionTest(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test';
+        myAccount.active__c = 'yes';            
+        myAccounts.add(myAccount);
+        insert myAccounts;
+        delete myAccounts;
+         List<Account> queryAccounts = [SELECT Id FROM Account
+                                                WHERE id IN :myAccounts];
+        System.AssertEquals(1,queryAccounts.size() ,'Account not deleted');
+    }
+//Solution : try and catch block
+    @isTest static void preventAccountDeletionTestStatusPassed(){
+        List<Account> myAccounts= new List<Account>();
+        Account myAccount = new Account();
+        myAccount.name = 'Test';
+        myAccount.active__c = 'yes';            
+        myAccounts.add(myAccount);
+        insert myAccounts;
+	try{
+	delete myAccounts;
+	        }catch(DMLException e){
+	System.debug(e.getMessage());
+	 }
+         List<Account> queryAccounts = [SELECT Id FROM Account
+                                                WHERE id IN :myAccounts];
+        System.AssertEquals(1,queryAccounts.size() ,'Account not deleted');
+    }
 }
