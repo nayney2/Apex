@@ -21,7 +21,7 @@ trigger AccountTrigger on Account (before insert,after insert,before update,afte
             
         }
         if(trigger.isAfter){
-            AccountTriggerHandler.updateContactsPhoneUsingMap(Trigger.new,Trigger.oldMap); 
+            AccountTriggerHandler.updateContactsPhone(Trigger.new,Trigger.oldMap); 
             //    AccountTriggerHandler.AccountphoneUpdatingParentToChild(Trigger.new,Trigger.oldMap); 
           //  if(!RecursionVar.firstCall){
               //  RecursionVar.firstCall =true ;
