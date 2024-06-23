@@ -1,6 +1,7 @@
 trigger OpportunityTrigger on Opportunity (before insert,after update) {
 	  if(trigger.isInsert){
         if(trigger.isBefore){
+             OpportunityTriggerHandler.preventCreationOfoppWithoutAmount(Trigger.new);
        //     OpportunityTriggerHandler.updateOppDescription(Trigger.new);
             OpportunityTriggerHandler.updateOpportunityDescription(Trigger.new,null);
         }
