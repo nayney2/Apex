@@ -127,6 +127,9 @@ public class AccountTriggerHandler{
         for(Account acc: accList){
             if(acc.active__c == 'yes'){
                 acc.addError('Active accounts cannot be deleted');
+      //Using custom label
+      //                acc.addError(label.Wait);
+
         }
         }}
 }
