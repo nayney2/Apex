@@ -22,21 +22,19 @@ public class OpportunityTriggerHandler {
             }
         }
     }
-        @isTest static void createRelatedTaskTest(){
-        List<Opportunity> myOpportunities = new List<Opportunity>();
-            Opportunity opp = new Opportunity(
-                name = 'twix',closeDate=date.today(),
-                stageName='Close lost');
-            myOpportunities.add(opp);
-        Insert myOpportunities;
-            for(Opportunity op : myOpportunities){
-                op.stageName='Close won';
+    public static void createRelatedTask(List<Opportunity> oppList, Map<Id,Opportunity> MapOpp){
+        List<Task> myTasks = new List<Task>();
+        for(Opportunity opp :oppList){
+            if( opp.stageName != MapOpp.get(opp.id).stageName){
+                  Task myTask = new Task();
+                          myTask.WhatId = opp.Id ;
+                          myTask.status = 'In progress' ;
+                          myTask.subject = 'Related task' ;
+                          myTask.OwnerId = opp.OwnerId ;
+                          myTasks.add(myTask);
             }
-        Test.startTest();
-        Update myOpportunities;
-        Test.stopTest();  
-         List<Task> queryTask= [SELECT Id FROM Task
-                                               Where whatId =:myOpportunities[0].id];
-        System.AssertEquals(1,queryTask.size() ,'Task not updated');
+        } 
+        Insert myTasks ;	
+        
     }
 }
