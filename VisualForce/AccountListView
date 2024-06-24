@@ -16,12 +16,18 @@
         </apex:pageBlock>
     </apex:form> 
 </apex:page>
-// Calling Apex class Check AccountController.apxc
+//View accounts in Ascendng order Calling Apex class Check AccountController.apxc
 <apex:page Controller="AccountController" >
     <apex:form >
         <apex:pageBlock title="Account List" id="acc_list">
             <apex:pageBlockTable  value="{!accounts}" var="acc">
-                <apex:column  value="{!acc.name}"/>
+                <apex:column  value="{!acc.name}">
+                	<apex:facet name="header">
+                        <apex:commandLink action="{!sortByName}" rerender="acc_list">
+                       Account Name
+                            </apex:commandLink>
+                </apex:facet>
+                    </apex:column>
                 <apex:column  value="{!acc.phone}"/>
                 <apex:column  value="{!acc.rating}"/>
             </apex:pageBlockTable>
