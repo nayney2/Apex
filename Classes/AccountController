@@ -1,0 +1,6 @@
+public class AccountController {
+    public List<Account> getAccounts(){
+        List<Account> myAccounts = [SELECT Id,name,phone,rating FROM Account LIMIT 2];
+        return myAccounts;
+    }
+}
