@@ -14,6 +14,7 @@ trigger OpportunityTrigger on Opportunity (before insert,after update) {
         }}	  
 if(trigger.isUpdate){
         if(trigger.isBefore){
+            OpportunityTriggerHandler.populateCloseLostReason(Trigger.new,Trigger.oldMap);
             OpportunityTriggerHandler.updateOppDescription(Trigger.new);
                        OpportunityTriggerHandler.updateOpportunityDescription(Trigger.new,Trigger.oldMap);
 
