@@ -44,4 +44,11 @@ public class OpportunityTriggerHandler {
 
         }
         }}
+        public static void populateCloseLostReason(List<Opportunity> oppList,Map<Id,Opportunity> MapOpp){
+        for(Opportunity opp: oppList){
+            if( opp.stageName== 'Close Lost' && opp.stageName != MapOpp.get(opp.id).stageName && opp.Closed_Lost_Reason__c	==null ){
+              opp.addError('Please populate Closed Lost reason');
+
+        }
+        }}
 }
