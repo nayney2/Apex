@@ -17,7 +17,7 @@
     </apex:form> 
 </apex:page>
 //View accounts in Ascendng order Calling Apex class Check AccountController.apxc
-<apex:page Controller="AccountController" >
+<apex:page Controller="AccountController" >       // custom controller
     <apex:form >
         <apex:pageBlock title="Account List" id="acc_list">
             <apex:pageBlockTable  value="{!accounts}" var="acc">
