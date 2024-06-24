@@ -73,4 +73,24 @@ private class TestClass {
                   System.AssertEquals(true,exp,'Account not Updated');
         }
     }
+    @isTest static void populateCloseLostReasonTest(){
+         List<Opportunity> myOpportunities = new List<Opportunity>();
+        Opportunity opp = new Opportunity(
+            name = 'test',closeDate=date.today(),
+            stageName='Prospecting');
+        myOpportunities.add(opp);
+        Insert myOpportunities;
+        Test.startTest();
+         try{
+           for(Opportunity o : myOpportunities){
+                o.stageName='Close Lost';
+            }
+            Update myOpportunities;
+
+        }catch(DMLexception e){
+            Boolean  exp = (e.getMessage().contains('Please populate Closed Lost reason')) ? true : false 	;
+                  System.AssertEquals(true,exp,'Opportunity not Updated');
+        }
+        Test.stopTest();
+    }
 }
