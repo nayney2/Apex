@@ -16,3 +16,15 @@
         </apex:pageBlock>
     </apex:form> 
 </apex:page>
+// Calling Apex class Check AccountController.apxc
+<apex:page Controller="AccountController" >
+    <apex:form >
+        <apex:pageBlock title="Account List" id="acc_list">
+            <apex:pageBlockTable  value="{!accounts}" var="acc">
+                <apex:column  value="{!acc.name}"/>
+                <apex:column  value="{!acc.phone}"/>
+                <apex:column  value="{!acc.rating}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>
