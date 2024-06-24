@@ -1,6 +1,11 @@
 public class AccountController {
+    private string sortOrder='rating';
     public List<Account> getAccounts(){
-        List<Account> myAccounts = [SELECT Id,name,phone,rating FROM Account LIMIT 2];
+        
+        List<Account> myAccounts = Database.query('SELECT Id,name,phone,rating FROM Account Order by '+sortOrder+' ASC '+'LIMIT 2');
         return myAccounts;
+    }
+    public void sortByName(){
+        this.sortOrder='Name';
     }
 }
