@@ -1,0 +1,42 @@
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+    @HTTPPost
+        global static string insertAccountWrapper(AccountInformations accInfos){
+          List<Account> myAccs = accInfos.accList ;
+          List<Contact> myCons = accInfos.conList;
+          List<Case> myCases = accInfos.caseList;
+        try{
+                    insert myAccs;
+            for(Contact con : myCons){
+                con.AccountId = myAccs[0].id ;
+            }
+            insert myCons ;
+            for(Case cs: myCases){
+                cs.AccountId = myAccs[0].id ;
+            }
+            insert myCases ;
+					return 'Accounts and contacts and cases have been inserted successfuly';
+        }catch(exception e){
+            					return e.getMessage();
+
+        }
+    }
+global class AccountInformations {
+    global List<Account> accList{get;set;}
+    global List<Contact> conList{get;set;}
+    global List<Case> caseList{get;set;}
+    
+}}
+//Postman body
+{
+"accInfos": {
+    "accList": [
+        {"name" : "Test acc Wrapper"},{"name" : "Test2 acc Wrapper"}
+    ],
+    "conList" : [
+       {"LastName" : "Test con wrapper"} ,{"LastName" : "Test2 con wrapper"}
+    ],
+    "caseList":[
+        
+    ]
+    }
