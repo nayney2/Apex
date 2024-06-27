@@ -1,0 +1,47 @@
+1/Delete One account
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+@HTTPDelete
+	   global static String deleteAccount(){
+        Map<String,String> paramsMap =RestContext.request.params;
+           Id myID = paramsMap.get('Id') ;
+           Account accToDelete = [SELECT Id FROM ACCOUNT WHERE ID = :myId];
+           if(accToDelete!=null){
+           try{
+               delete accToDelete ;
+               return 'Account has been deleted';
+           }catch(Exception e){
+               return e.getMessage();
+           }	
+           }else{
+               return 'Account not founded';
+           }
+       }}
+2//Delete many accounts once , through postman enter n and Ids to Query Params 
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+@HTTPDelete
+	   global static String deleteAccount(){
+           
+        Map<String,String> paramsMap =RestContext.request.params;
+           Integer n = 0;
+          //N represents how many Ids you will enter
+           Set<Id> myIds = new Set<Id>();
+           String m = paramsMap.get('n') ;
+           n = integer.valueof(m);
+           for(integer i=1 ;i<=n ;i++){
+           Id myID = paramsMap.get('Id'+i) ;
+               myIds.add(myID);
+           }
+           List<Account> accsToDelete = [SELECT Id FROM ACCOUNT WHERE ID = :myIds];
+           if(!accsToDelete.isEmpty()){
+           try{
+               delete accsToDelete ;
+               return 'Accounts have been deleted';
+           }catch(Exception e){
+               return e.getMessage();
+           }	
+           }else{
+               return 'Accounts not founded';
+           }}
+}
