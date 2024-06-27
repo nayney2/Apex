@@ -22,3 +22,15 @@ global class AccountWrapper {
     global List<Case> caseList;
     
 }}
+// Using Parent to child relationship
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+    @HTTPGet
+   global static List<Account> getTopAccounts(){
+        Map<String,String> paramsMap =RestContext.request.params;
+        String myIndustry = paramsMap.get('industry');
+        List<Account> accList =[SELECT id,industry,rating,annualrevenue,(SELECT id,LastName FROM Contacts), (SELECT id,subject FROM Cases)
+                                FROM ACCOUNT WHERE annualrevenue!=NULL AND industry =:myIndustry
+                                ORDER BY annualrevenue desc LIMIT 10];
+        return accList ;
+    }}
