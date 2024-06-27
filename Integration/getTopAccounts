@@ -1,0 +1,11 @@
+// Using the urlMapping in postman
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+@HTTPGet
+    global static List<Account> getTopAccounts(){
+        List<Account> accList =[SELECT id,industry,rating,annualrevenue 
+                                FROM ACCOUNT WHERE annualrevenue!=NULL 
+                                ORDER BY annualrevenue desc LIMIT 10];
+            return accList ;
+    }
+}
