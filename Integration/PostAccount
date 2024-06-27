@@ -1,7 +1,7 @@
 @RestResource(urlMapping='/IntegrateAccount/')
 global class IntegrateAccount {
-@HTTPPost
-        global static String insertAccount(String myName,String myIndustry, String myRating){
+@HTTPPost 
+        global static String insertAccount(String myName,String myIndustry, String myRating){  //With the help of wrapper we can pass any number of fields
         List<Account> myAccounts = new List<Account>();
         Account myAccount = new Account(); 
         myAccount.name = myName;
