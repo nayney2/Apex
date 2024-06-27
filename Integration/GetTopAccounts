@@ -9,3 +9,17 @@ global class IntegrateAccount {
             return accList ;
     }
 }
+//Method with parameter 
+//Add the key and value(parameter) to query parameter in postman
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+@HTTPGet
+    global static List<Account> getTopAccounts(){
+        Map<String,String> paramsMap =RestContext.request.params;     //since HttpGet methods do not support parameters
+        String myIndustry = paramsMap.get('industry');
+        List<Account> accList =[SELECT id,industry,rating,annualrevenue 
+                                FROM ACCOUNT WHERE annualrevenue!=NULL AND industry =:myIndustry
+                                ORDER BY annualrevenue desc LIMIT 10];
+            return accList ;
+    }
+}
