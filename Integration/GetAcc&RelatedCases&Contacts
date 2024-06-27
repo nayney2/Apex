@@ -1,0 +1,24 @@
+    @RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+    @HTTPGet
+global static AccountWrapper getTopAccountsWrapper(){
+        Map<String,String> paramsMap =RestContext.request.params;
+        String myIndustry = paramsMap.get('industry');
+        List<Account> myAccs =[SELECT id,industry,rating,annualrevenue 
+                                FROM ACCOUNT WHERE annualrevenue!=NULL AND industry =:myIndustry
+                                ORDER BY annualrevenue desc LIMIT 10];
+        List<Contact> myContacts=[SELECT id,LastName FROM CONTACT WHERE AccountId IN :myAccs ];
+        List<Case> myCases = [SELECT id,subject,priority FROM Case WHERE AccountId IN :myAccs ];
+        AccountWrapper AccW = new  AccountWrapper() ;
+        AccW.accList = myAccs ;
+        AccW.conList = myContacts;
+        AccW.caseList = myCases;
+        return AccW ;
+    }
+
+global class AccountWrapper {
+    global List<Account> accList;
+    global List<Contact> conList;
+    global List<Case> caseList;
+    
+}}
