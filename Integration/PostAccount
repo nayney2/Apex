@@ -1,0 +1,18 @@
+@RestResource(urlMapping='/IntegrateAccount/')
+global class IntegrateAccount {
+@HTTPPost
+        global static String insertAccount(String myName,String myIndustry, String myRating){
+        List<Account> myAccounts = new List<Account>();
+        Account myAccount = new Account(); 
+        myAccount.name = myName;
+        myAccount.Industry = myIndustry;
+        myAccount.Rating = myRating;
+        myAccounts.add(myAccount);
+        try{
+                    insert myAccounts;
+					return 'Account has been inserted successfuly';
+        }catch(exception e){
+            					return e.getMessage();
+
+        }
+    }}
