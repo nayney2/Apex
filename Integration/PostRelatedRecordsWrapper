@@ -1,7 +1,7 @@
 @RestResource(urlMapping='/IntegrateAccount/')
 global class IntegrateAccount {
     @HTTPPost
-        global static string insertAccountWrapper(AccountInformations accInfos){
+        global static string insertAccountWrapper(AccountInformations accInfos){  //With the help of wrapper we can pass any number of fields
           List<Account> myAccs = accInfos.accList ;
           List<Contact> myCons = accInfos.conList;
           List<Case> myCases = accInfos.caseList;
