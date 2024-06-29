@@ -1,0 +1,44 @@
+public class LinkedinIntegration {    
+        public static string loginToLinkedin(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setendpoint('callout:Linkedin_integ/v2/userinfo');   
+        request.setMethod('GET');
+        HttpResponse response = http.send(request);
+        // Deserialize the JSON string into collections of primitive data types.
+        Map<String, Object> result  = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+        String loginId= (String) result.get('sub');
+        return loginId;
+    }
+    public static void postMessage(String loginid,String postMessage){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setMethod('POST');
+        request.setheader('X-Restli-Protocol-Version','2.0.0');
+        request.setheader('Content-type','application/json');
+        String authorId = 'urn:li:person:'+loginid;
+        String Msg = '{'+
+            '"author": "'+authorId+'",'+
+            '"lifecycleState": "PUBLISHED",'+
+            '"specificContent": { '+
+            '"com.linkedin.ugc.ShareContent": {'+
+            '"shareCommentary": {'+
+            '"text": "'+postMessage+'"'+
+            '},'+
+            '"shareMediaCategory": "NONE"'+
+            '}'+
+            '},'+
+            '"visibility": {'+
+            '"com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"'+
+            '}'+'}';
+        request.setbody(Msg);
+        request.setendpoint('callout:Linkedin_integ/v2/ugcPosts');   
+        HttpResponse response = http.send(request);
+        System.debug('response'+response.getBody());
+        System.debug('Status code'+response.getstatuscode());
+    }
+        public static void shareOnLinkedin(String Message){
+        String loginId=loginToLinkedin() ;
+        postMessage(loginId,Message);
+    }
+}
