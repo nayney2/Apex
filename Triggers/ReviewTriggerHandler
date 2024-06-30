@@ -1,0 +1,13 @@
+public class ReviewTriggerHandler {
+    public static void populateYes(List<Review__c> myReviews, Map<Id,Review__c> MapReview){
+        List<Job_Application__c> JobsList = new List<Job_Application__c>();
+        List<Review__c> parentReviews = [SELECT Id ,rating__c,Job_Application__r.Id FROM Review__c WHERE Id IN :myReviews ];
+        for(Review__c rev: parentReviews){
+            if((MapReview == null && rev.rating__c !=null) || (MapReview != null && rev.rating__c !=null )){
+                rev.Job_Application__r.Review_Provided__c = 'Yes';
+                JobsList.add(rev.Job_Application__r);
+            }
+        }
+        Update JobsList ;
+    }
+}
