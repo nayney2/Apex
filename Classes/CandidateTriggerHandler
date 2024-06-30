@@ -39,9 +39,12 @@ public class CandidateTriggerHandler{
         List<Candidate__c> compareCandidates = [SELECT Id,Email__c FROM Candidate__c WHERE Id NOT IN :myCandidates ];
         for(Candidate__c can :myCandidates){
             if((MapCanditates == null && can.Email__c !=null)||(MapCanditates != null && can.Email__c !=null && can.Email__c !=MapCanditates.get(can.id).Email__c)){
-            for(Candidate__c mapCan : compareCandidates){
-                if(can.Email__c == mapCan.Email__c){
-                    can.addError('Duplicate Email');
+            for(Candidate__c comCan : compareCandidates){
+                if(can.Email__c == comCan.Email__c){
+                  //  can.addError('Duplicate Email');  //To prevent Insertion
+                  can.Duplicate_Candidate__c	= true;
+                }else{
+                                      can.Duplicate_Candidate__c	= false;
                 }
             }
         }
