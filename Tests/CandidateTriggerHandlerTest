@@ -5,7 +5,7 @@ public class CandidateTriggerHandlerTest {
         Candidate__c firstCan = new Candidate__c();
         firstCan.First_Name__c = 'First';
         firstCan.Last_Name__c = 'can';
-        firstCan.Email__c = 'baddagmanal1999@gmail.com';
+        firstCan.Email__c = 'test@gmail.com';
         ListCan.add(firstCan);
         Candidate__c secondCan = new Candidate__c();
         secondCan.First_Name__c = 'Second';
@@ -14,7 +14,7 @@ public class CandidateTriggerHandlerTest {
         Insert ListCan;
         for(Candidate__c can :ListCan){
             if(Can.First_Name__c== 'Second' )
-        can.Email__c = 'baddagmanal1999@gmail.com';}
+        can.Email__c = 'test@gmail.com';}
         Test.startTest();
         Update ListCan;
         Test.stopTest();
@@ -26,7 +26,7 @@ public class CandidateTriggerHandlerTest {
         Candidate__c firstCan = new Candidate__c();
         firstCan.First_Name__c = 'First';
         firstCan.Last_Name__c = 'can';
-        firstCan.Email__c = 'baddagmanal1999@gmail.com';
+        firstCan.Email__c = 'test@gmail.com';
         ListCan.add(firstCan);
 	try{
         Insert ListCan ;
