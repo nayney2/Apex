@@ -1,0 +1,32 @@
+public class PositionTriggerHandler {
+    public static void updatePosition(List<Position__c> positions){
+        for(Position__c pos: positions){
+            if(pos.Status__c== 'New Position'){ 
+                if(pos.Open_Date__c == null){
+                    pos.Open_Date__c = date.today();
+                } 
+                if(pos.Min_Pay__c ==null){
+                    pos.Min_Pay__c = 10000;
+                    
+                }
+                if(pos.Max_Pay__c==null ){
+                    pos.Max_Pay__c= 15000;
+                }
+            }
+        }}
+    public static void createTask(List<Position__c> positions){
+        List<Task> myTasks = new List<Task>();
+        for(Position__c pos: positions){
+            if(pos.Status__c== 'New Position'){
+                Task myTask = new Task();
+                myTask.subject = pos.name ;
+                myTask.status = 'Not started' ;
+                myTask.priority= 'High' ;
+                myTask.whatId = pos.Id ;
+                myTask.activitydate = date.today() ;
+                myTask.OwnerId = userInfo.getUserId() ;
+                myTasks.add(myTask);
+                
+            }
+        }  Insert myTasks;  }
+}
