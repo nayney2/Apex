@@ -1,0 +1,31 @@
+@isTest
+public class ReviewTriggerHandlerTest {
+    @isTest public static void populateYes(){
+        List<Candidate__c> myCandidates = new List<Candidate__c>();
+        Candidate__c myCandidate = new Candidate__c();
+        myCandidate.First_Name__c = 'Test' ;
+        myCandidate.Last_Name__c ='Candidate' ;
+        myCandidates.add(myCandidate);
+        Insert myCandidates ;
+        List<Position__c> myPositions = new List<Position__c>();
+        Position__c myPosition = new Position__c();
+        myPosition.name = 'Test position';
+        myPositions.add(myPosition);
+        Insert myPositions;
+        List<Job_Application__c> myJobs = new List<Job_Application__c>();
+        Job_Application__c myJob = new Job_Application__c();
+        myJob.Position__c = myPositions[0].id;
+        myJob.Candidate__c = myCandidates[0].id;
+        myJobs.add(myJob);
+        Insert myJobs ; 
+        List<Review__c> myReviews = new List<Review__c>();
+        Review__c myReview = new Review__c();
+        myReview.Job_Application__c = myJobs[0].id ;
+        myReview.Rating__c = 3;
+        myReviews.add(myReview);
+        insert myReviews;
+        List<Review__c> queryReviews = [SELECT Id,Job_Application__r.Review_Provided__c 
+                                        FROM Review__c WHERE Id IN  :myReviews];
+        System.assertEquals('Yes',queryReviews[0].Job_Application__r.Review_Provided__c,'Job application has not been updated');
+    }
+}
