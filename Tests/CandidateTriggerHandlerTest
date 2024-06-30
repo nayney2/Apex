@@ -1,0 +1,37 @@
+@isTest
+public class CandidateTriggerHandlerTest {
+    @isTest public static void sendEmailTest(){
+        List<Candidate__c> ListCan = new List<Candidate__c>();
+        Candidate__c firstCan = new Candidate__c();
+        firstCan.First_Name__c = 'First';
+        firstCan.Last_Name__c = 'can';
+        firstCan.Email__c = 'baddagmanal1999@gmail.com';
+        ListCan.add(firstCan);
+        Candidate__c secondCan = new Candidate__c();
+        secondCan.First_Name__c = 'Second';
+        secondCan.Last_Name__c = 'can';
+        ListCan.add(secondCan);
+        Insert ListCan;
+        for(Candidate__c can :ListCan){
+            if(Can.First_Name__c== 'Second' )
+        can.Email__c = 'baddagmanal1999@gmail.com';}
+        Test.startTest();
+        Update ListCan;
+        Test.stopTest();
+        List<Candidate__c> queryCan = [SELECT Id,Email__c FROM Candidate__c WHERE ID IN :ListCan];
+        	System.AssertEquals('baddagmanal1999@gmail.com',queryCan[0].Email__c,'Candidate has not been updated' );
+    }
+    @isTest public static void validationRule(){
+         List<Candidate__c> ListCan = new List<Candidate__c>();
+        Candidate__c firstCan = new Candidate__c();
+        firstCan.First_Name__c = 'First';
+        firstCan.Last_Name__c = 'can';
+        firstCan.Email__c = 'baddagmanal1999@gmail.com';
+        ListCan.add(firstCan);
+	try{
+        Insert ListCan ;
+	        }catch(DMLException e){
+	Boolean  exp = (e.getMessage().contains('Duplicate Email')) ? true : false ; 
+	 }
+    }
+}
