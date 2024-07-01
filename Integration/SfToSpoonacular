@@ -27,8 +27,9 @@ public class SalesforceToSpoonacular {
              System.debug(JSON.deserializeUntyped(response.getBody())) ;
         }
     }
-    public static void getRecipesbyIngredients(){
-                     String API_PARAM = 'findByIngredients?ingredients=apples,+flour,+sugar&number=2&';
+    public static void getRecipesbyIngredients(String ingredients){                //to test : ClassName.getRecipesbyIngredients('apples,flour,sugar');
+                     String API_PARAM = 'findByIngredients?ingredients='+ingredients+'&';
+                   // OR  String API_PARAM = 'findByIngredients?ingredients=apples,+flour,+sugar&number=2&';
 // OR https://api.spoonacular.com/recipes/findByIngredients?apiKey=YOUR-API-KEY&ingredients=apples,+flour,+sugar&number=2
         Http http = new Http();
         HttpRequest request = new HttpRequest();
