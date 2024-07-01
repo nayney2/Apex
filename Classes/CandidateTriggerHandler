@@ -35,10 +35,10 @@ public class CandidateTriggerHandler{
         }
         return sendResult;
     }
-    public static void validationRule(List<Candidate__c> myCandidates,Map<Id,Candidate__c> MapCanditates) {
+    public static void validationRule(List<Candidate__c> myCandidates) {
         List<Candidate__c> compareCandidates = [SELECT Id,Email__c FROM Candidate__c WHERE Id NOT IN :myCandidates ];
         for(Candidate__c can :myCandidates){
-            if((MapCanditates == null && can.Email__c !=null)||(MapCanditates != null && can.Email__c !=null && can.Email__c !=MapCanditates.get(can.id).Email__c)){
+            if(can.Email__c !=null){
             for(Candidate__c comCan : compareCandidates){
                 if(can.Email__c == comCan.Email__c){
                   //  can.addError('Duplicate Email');  //To prevent Insertion
