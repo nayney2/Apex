@@ -33,5 +33,6 @@ public class CandidateTriggerHandlerTest {
 	        }catch(DMLException e){
 	Boolean  exp = (e.getMessage().contains('Duplicate Email')) ? true : false ; 
 	 }
+//Updating Duplicate_Candidate__c works from UI
     }
 }
