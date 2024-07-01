@@ -1,9 +1,10 @@
 public class SalesforceToSpoonacular {
-            Private static final String endPoint = 'https://api.spoonacular.com/recipes/random?apiKey=YOUR-API-KEY';
+            Private static final String API_URL = 'https://api.spoonacular.com/recipes/random?apiKey=';
+            Private static final String API_Key = 'YOUR-API-KEY';
     public static void getRandomRecipe(){
         Http http = new Http();
         HttpRequest request = new HttpRequest();
-        request.setEndpoint(endPoint);
+        request.setEndpoint(API_URL+API_Key);
         request.setMethod('GET');
         HttpResponse response = http.send(request);
         // If the request is successful, parse the JSON response.
