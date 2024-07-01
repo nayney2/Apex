@@ -30,6 +30,7 @@ public class SalesforceToSpoonacular {
     }
     public static void getRecipesbyIngredients(){
                      String API_PARAM = 'findByIngredients?ingredients=apples,+flour,+sugar&number=2&';
+// OR https://api.spoonacular.com/recipes/findByIngredients?apiKey=YOUR-API-KEY&ingredients=apples,+flour,+sugar&number=2
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         request.setEndpoint(API_URL+API_PARAM+API_Key);
