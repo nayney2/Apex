@@ -1,6 +1,47 @@
 public class SalesforceToSpoonacular {
             Private static final String API_URL = 'https://api.spoonacular.com/recipes/random?apiKey=';
-            Private static final String API_Key = 'YOUR-API-KEY';
+            Private static final String API_Key = 'public class SalesforceToSpoonacular {
+            Private static final String API_URL = 'https://api.spoonacular.com/recipes/';
+            Private static final String API_PARAM = 'random?';
+            Private static final String API_Key = 'YOUR-API-KEY';               //Generate your Key
+    public static void getRandomRecipe(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(API_URL+API_PARAM+API_Key);
+        request.setMethod('GET');
+        HttpResponse response = http.send(request);
+        // If the request is successful, parse the JSON response.
+        if(response.getStatusCode() == 200) {
+             System.debug(JSON.deserializeUntyped(response.getBody())) ;
+        }
+    }
+     public static void getRecipeInformation(){
+         Integer myId = 716429;
+                     String API_PARAM = myId+'/information?';
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(API_URL+API_PARAM+API_Key);
+        request.setMethod('GET');
+        HttpResponse response = http.send(request);
+        // If the request is successful, parse the JSON response.
+        if(response.getStatusCode() == 200) {
+             System.debug(JSON.deserializeUntyped(response.getBody())) ;
+        }
+    }
+    public static void getRecipesbyIngredients(){
+                     String API_PARAM = 'findByIngredients?ingredients=apples,+flour,+sugar&number=2&';
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(API_URL+API_PARAM+API_Key);
+        request.setMethod('GET');
+        HttpResponse response = http.send(request);
+        // If the request is successful, parse the JSON response.
+        if(response.getStatusCode() == 200) {
+             System.debug(JSON.deserializeUntyped(response.getBody())) ;
+        }
+    }
+    
+}';
     public static void getRandomRecipe(){
         Http http = new Http();
         HttpRequest request = new HttpRequest();
