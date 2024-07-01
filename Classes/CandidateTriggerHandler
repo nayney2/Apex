@@ -43,8 +43,6 @@ public class CandidateTriggerHandler{
                 if(can.Email__c == comCan.Email__c){
                   //  can.addError('Duplicate Email');  //To prevent Insertion
                   can.Duplicate_Candidate__c	= true;
-                }else{
-                                      can.Duplicate_Candidate__c	= false;
                 }
             }
         }
