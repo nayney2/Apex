@@ -15,8 +15,7 @@ public class SalesforceToSpoonacular {
              System.debug(JSON.deserializeUntyped(response.getBody())) ;
         }
     }
-     public static void getRecipeInformation(){
-         Integer myId = 716429;
+     public static void getRecipeInformation(Integer myId){
                      String API_PARAM = myId+'/information?';
         Http http = new Http();
         HttpRequest request = new HttpRequest();
