@@ -1,0 +1,32 @@
+//Source Org : Using sessionId
+public class SecSfToSfSessionId {
+    public static void getCases(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setendpoint('Your-URL/services/apexrest/Cases');   
+        request.setMethod('GET');
+        request.setHeader('Authorization','Bearer Your-Token');
+        HttpResponse response = http.send(request);
+        System.debug('Status code '+response.getStatusCode());
+        // If the request is successful, parse the JSON response.
+        if(response.getStatusCode() == 200) {
+            System.debug('response '+response.getBody());
+        }
+    }
+    public static void postCase(){
+        Http http = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setendpoint('Your-URL/services/apexrest/Cases/*');   
+        request.setMethod('POST');
+        request.setheader('Content-Type','application/json;charset=UTF-8');  
+        request.setHeader('Authorization','Bearer Your-Token');
+        request.setbody('{"subject":"test subject","status":"New","origin":"Phone","priority":"Low"}');        
+        HttpResponse response = http.send(request);
+        System.debug('response '+response.getBody());
+        
+        // If the request is successful, parse the JSON response.
+        if(response.getStatusCode() == 200) {
+            System.debug('Record has been created');
+        }
+    }
+}
