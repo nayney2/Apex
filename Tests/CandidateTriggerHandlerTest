@@ -35,4 +35,23 @@ public class CandidateTriggerHandlerTest {
 	 }
 //Updating Duplicate_Candidate__c works from UI
     }
+  @isTest public static void uinTest(){
+        List<Candidate__c> ListCan = new List<Candidate__c>();
+        Candidate__c firstCan = new Candidate__c();
+        firstCan.First_Name__c = 'First';
+        firstCan.Last_Name__c = 'cwan';
+        firstCan.Year_of_passing__c = 2026 ;
+        firstCan.City_of_birth__c = 'Casablanca' ;
+        firstCan.Branch__c ='Ingénieur en Computer Science';
+        firstCan.Year_of_birth__c = 1989 ;
+        ListCan.add(firstCan);
+        Insert ListCan ;
+        for(Candidate__c can : ListCan){
+            if(can.Id == ListCan[0].Id)
+            firstCan.Branch__c ='Computer Science';
+        }
+        Update ListCan ;
+        List<Candidate__c> queryCan = [SELECT Id,UIN__c	 FROM Candidate__c WHERE ID =:ListCan[0].id];
+        System.AssertEquals('26-CSCa-1989',queryCan[0].UIN__c,'Candidate has not been inserted' );
+    }
 }
