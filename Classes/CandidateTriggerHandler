@@ -48,4 +48,25 @@ public class CandidateTriggerHandler{
         }
 }
     }
+ public static void uiNumber(List<Candidate__c> myCandidates,Map<Id,Candidate__c> MapCandidate) {
+                for(Candidate__c can :myCandidates){
+                    if(MapCandidate == null  || MapCandidate != null ){
+              if(can.Year_of_birth__c!=null &&  can.Branch__c!=null &&  can.Year_of_passing__c!=null &&  can.City_of_birth__c!=null){
+                       String numToString = String.valueOf(can.Year_of_passing__c);
+                      String lasttwoYearDigits = numToString.right(2) ;
+                      String firsttwocityDigits = can.City_of_birth__c.left(2) ;
+                    String firstDigit = can.Branch__c.left(1);
+                    List<String> ls = can.Branch__c.split('');
+					String rest ='';
+                    for(integer i =0 ;i<ls.size();i++){
+                        if(ls[i]==' '){
+                            rest = rest + ls[i+1] ;
+                       } 
+                    } 
+                   String branch=  firstDigit +rest ;
+                      can.UIN__c = lasttwoYearDigits+'-'+branch+firsttwocityDigits+'-'+can.Year_of_birth__c ;
+                  }
+                    }
+                }
+    }
 }
